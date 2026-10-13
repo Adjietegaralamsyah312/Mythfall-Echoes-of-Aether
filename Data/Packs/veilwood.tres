@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PackDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/ContentPacks/PackDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pack_id = "veilwood"
+display_name = "Veilwood Pack"
+version = "0.0.0"
+schema_version = 1
+status = 2
+region_ids = Array[String](["veilwood_forest"])
+download_url = ""
+file_bytes = -1
+installed_bytes = -1
+sha256 = ""
+contents = Array[String]([])
+min_app_version = "0.1.0"
+description = "Rencana: Veilwood Forest (hutan) — region, encounter, loot, tileset hutan/kanopi. ASET BELUM ADA: butuh paket CC0 terverifikasi + integrasi nyata."
+dependencies = Array[String](["initial"])
+license_note = "Belum ada aset — wajib CC0 terverifikasi sebelum diklaim."

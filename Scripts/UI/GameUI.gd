@@ -305,6 +305,10 @@ func _build_settings() -> void:
 	var ok: Button = _mkbtn("Simpan")
 	ok.pressed.connect(_on_settings_save)
 	row.add_child(ok)
+	var packs: Button = _mkbtn("Paket Konten")
+	packs.custom_minimum_size = Vector2(170, 64)
+	packs.pressed.connect(_open_packs)
+	row.add_child(packs)
 	var back: Button = _mkbtn("Kembali")
 	back.pressed.connect(toggle_settings)
 	row.add_child(back)
@@ -416,6 +420,12 @@ func toggle_pause() -> void:
 func toggle_settings() -> void:
 	_click()
 	_settings_panel.visible = not _settings_panel.visible
+
+
+## D2: buka panel Paket Konten di atas overlay (tanpa rombak UI lain).
+func _open_packs() -> void:
+	_click()
+	ContentPacksPanel.open_in(_root)
 
 
 func is_dialogue_open() -> bool:

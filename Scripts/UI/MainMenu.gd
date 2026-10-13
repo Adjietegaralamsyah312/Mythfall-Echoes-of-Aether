@@ -139,11 +139,21 @@ func _build_settings() -> void:
 	ok.custom_minimum_size = Vector2(140, 64)
 	ok.pressed.connect(_on_settings_save)
 	row.add_child(ok)
+	var packs := Button.new()
+	packs.text = "Paket Konten"
+	packs.custom_minimum_size = Vector2(170, 64)
+	packs.pressed.connect(_on_packs)
+	row.add_child(packs)
 	var back := Button.new()
 	back.text = "Kembali"
 	back.custom_minimum_size = Vector2(140, 64)
 	back.pressed.connect(func() -> void: _settings_panel.visible = false)
 	row.add_child(back)
+
+
+func _on_packs() -> void:
+	_settings_panel.visible = false
+	ContentPacksPanel.open_in(self)
 
 
 func _on_settings_save() -> void:

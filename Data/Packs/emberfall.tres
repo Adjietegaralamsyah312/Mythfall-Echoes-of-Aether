@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PackDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/ContentPacks/PackDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pack_id = "emberfall"
+display_name = "Emberfall Pack"
+version = "0.0.0"
+schema_version = 1
+status = 2
+region_ids = Array[String](["emberfall_highlands"])
+download_url = ""
+file_bytes = -1
+installed_bytes = -1
+sha256 = ""
+contents = Array[String]([])
+min_app_version = "0.1.0"
+description = "Rencana: Emberfall Highlands (dataran tinggi vulkanik) — alur Dawnroot Valley <-> Emberfall, encounter, loot, tileset basal/lava. ASET BELUM ADA: butuh paket CC0 terverifikasi + integrasi nyata ke scene/encounter."
+dependencies = Array[String](["initial"])
+license_note = "Belum ada aset — wajib CC0 terverifikasi sebelum diklaim."
