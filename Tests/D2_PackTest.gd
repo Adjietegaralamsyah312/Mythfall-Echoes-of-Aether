@@ -56,7 +56,7 @@ func _run() -> void:
 		_check(not reg.is_available(pid), pid + " tetap UNAVAILABLE")
 		var p: PackDef = reg.get_pack(pid)
 		_check(p != null and p.file_bytes == -1 and p.download_url.is_empty(), pid + " ukuran -1 + URL kosong (jujur)")
-	_check(reg.installed_size("initial") == 3369507, "installed_size initial 3369507 (E3: du union +E2)")
+	_check(reg.installed_size("initial") == 5042552, "installed_size initial 5042552 (F3: union +luminara)") # F3: union +luminara
 
 	# --- 2. Registry roundtrip + corrupt ---
 	for f: String in [TMP_REG]:

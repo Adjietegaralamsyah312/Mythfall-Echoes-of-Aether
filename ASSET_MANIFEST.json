@@ -143,12 +143,84 @@
     "impactMining_000.ogg 36b4ea10..",
     "impactPunch_heavy_000.ogg b33a8f14.. (penuh di Tools/count + sha256sum)"
    ],
-   "used_in_e2": [
-    "Scripts/UI/AudioManager.gd IMPACT_MAP + Scripts/World/Main.gd footstep Emberfall"
-   ]
-  }
- ],
- "engine": "4.7.2.stable.termux",
- "note": "Phase A 5 paket + E1/E2 5 paket Kenney CC0 (10 total). Runtime E2: Caves/Urban/Foliage/RPGExpansion/Impacts + EmberfallHighlands.tscn + EmberWisp. Sources/ staging tidak dihitung konten.",
- "phase": "E3"
+    "used_in_e2": [
+     "Scripts/UI/AudioManager.gd IMPACT_MAP + Scripts/World/Main.gd footstep Emberfall"
+    ]
+   },
+   {
+    "path": "Assets/Environment/Emberfall/floor_is_lava.png",
+    "source_url": "https://opengameart.org/content/floor-is-lava",
+    "zip_url": "https://opengameart.org/sites/default/files/floor_is_lava.png",
+    "zip_bytes": 6706,
+    "extracted_bytes": 6706,
+    "sha256_zip": "753aa100342b63e17f3539f8eaf545525e0765158a6c111efc85171d66d65292",
+    "license": "CC0",
+    "license_file": "",
+    "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok field-name-field-art-licenses halaman (cc0.png + CC0 + link CC0 1.0); bukti page.html di Sources/floor-is-lava/. Kreator: Kipperfalcon.",
+    "runtime_bytes": 7678,
+    "runtime_files": [
+     "Assets/Environment/Emberfall/floor_is_lava.png (sha256 753aa100342b63e17f3539f8eaf545525e0765158a6c111efc85171d66d65292)"
+    ],
+    "used_in_f2": [
+     "Scripts/World/EmberfallHighlands.gd LAVA_CRUST (3 crust static fallback)"
+    ]
+   },
+   {
+    "path": "Assets/Environment/Emberfall/lava_spr_strip45.png",
+    "source_url": "https://lpc.opengameart.org/content/16x16-and-animated-lava-tile-45-frames",
+    "zip_url": "https://lpc.opengameart.org/sites/default/files/Lava.zip",
+    "zip_bytes": 30214,
+    "extracted_bytes": 25982,
+    "sha256_zip": "8fee31ec96a2197a985cacbe421c7d264db96d9725c0db0eff2f7d2f7b027da8",
+    "license": "CC0",
+    "license_file": "",
+    "license_note": "LPC/OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok lisensi halaman; bukti page.html di Sources/lpc-lava-16x16-45f/. Kreator: davesch. Strip 17212 B sha89afd60f69cfff1dd577d24a1c2d7381027c9d8c1357784b9c0a81a4e4fb22ae diunduh terpisah dari URL halaman yang sama.",
+    "runtime_bytes": 18192,
+    "runtime_files": [
+     "Assets/Environment/Emberfall/lava_spr_strip45.png (sha256 89afd60f69cfff1dd577d24a1c2d7381027c9d8c1357784b9c0a81a4e4fb22ae)"
+    ],
+    "used_in_f2": [
+     "Scripts/World/EmberfallHighlands.gd LAVA_STRIP (2 lava pool anim 45f, dekor tanpa damage)"
+    ]
+   },
+   {
+    "path": "Assets/Audio/Ambience/dungeon_ambient_1.ogg",
+    "source_url": "https://opengameart.org/content/loopable-dungeon-ambience",
+    "zip_url": "https://opengameart.org/sites/default/files/dungeon_ambient_1_0.ogg",
+    "zip_bytes": 1626352,
+    "extracted_bytes": 1626352,
+    "sha256_zip": "df491823e4877371c34dbda4e9321cd83a4a14fa7573cee0ebca1ae423b70e6e",
+    "license": "CC0",
+    "license_file": "",
+    "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok lisensi halaman; bukti page.html di Sources/dungeon-ambience-loop/. Kreator: JaggedStone. Durasi 94,3 dtk, loop via flag AudioStreamOgg di F2.",
+    "runtime_bytes": 1626780,
+    "runtime_files": [
+     "Assets/Audio/Ambience/dungeon_ambient_1.ogg (sha256 df491823e4877371c34dbda4e9321cd83a4a14fa7573cee0ebca1ae423b70e6e)"
+    ],
+    "used_in_f2": [
+     "Scripts/UI/AudioManager.gd AMBIENT_MAP ambient_ember + Scripts/World/Main.gd play di emberfall/crypt"
+    ]
+   },
+   {
+    "path": "Assets/Environment/Luminara/desert_sand.png",
+    "source_url": "https://opengameart.org/content/16x16-tileset-water-grass-and-sand",
+    "zip_url": "https://opengameart.org/sites/default/files/voda_pesok_trava_revision_2.png",
+    "zip_bytes": 3049,
+    "extracted_bytes": 3049,
+    "sha256_zip": "6693fde88de22dfadb7f6bf8c44b158fd4a56ad15e9b47b62359fab2f1c2b799",
+    "license": "CC0",
+    "license_file": "",
+    "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok lisensi halaman; bukti page.html di Sources/desert-sand-16x16/. Kreator: Demetrius. File runtime = revision_2 diganti nama (byte+sha identik).",
+    "runtime_bytes": 4012,
+    "runtime_files": [
+     "Assets/Environment/Luminara/desert_sand.png (sha256 6693fde88de22dfadb7f6bf8c44b158fd4a56ad15e9b47b62359fab2f1c2b799)"
+    ],
+    "used_in_f2": [
+     "Scenes/World/LuminaraDesert.tscn (sand tiles + paver/batu hangat existing)"
+    ]
+   }
+  ],
+  "engine": "4.7.2.stable.termux",
+  "note": "Phase A 5 paket + E1/E2 5 paket Kenney CC0 (10 total) + F1 4 file CC0 OGA/LPC (14 total: floor-is-lava, lpc-lava, dungeon-ambience, desert-sand). Rilis 32px-zip DITOLAK + Foozle GAGAL: hanya di Sources/SOURCING_LOG.md, TIDAK masuk manifest. Runtime F2: lava strip/static + ambient ogg + desert sand + LuminaraDesert.tscn + LuminaraDesert.gd + luminara_desert.tres. Sources/ staging tidak dihitung konten.",
+  "phase": "F3"
 }

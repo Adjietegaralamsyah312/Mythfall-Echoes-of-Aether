@@ -14,6 +14,14 @@ signal volumes_applied(master: float, music: float, sfx: float)
 
 const SFX_BASE: String = "res://Assets/Audio/RPG/Audio/"
 const IMPACT_BASE: String = "res://Assets/Audio/Impacts/"
+## F2 ambient CC0 (JaggedStone, OGA): loopable dungeon/cave ambient 94.3 dtk
+## (wind + water drips) -> cocok Emberfall vulkanik + crypt. Tanpa tag LOOP
+## embedded -> loop via flag AudioStreamOggVorbis di bawah. Desert TERBUKA
+## (ambient gua tak cocok gurun terbuka; Luminara tanpa musik + catat).
+const AMBIENT_BASE: String = "res://Assets/Audio/Ambience/"
+const AMBIENT_MAP: Dictionary = {
+	"ambient_ember": "dungeon_ambient_1.ogg",
+}
 const IMPACT_MAP: Dictionary = {
 	"footstep_ember": "footstep_concrete_000.ogg",
 	"hit_metal": "impactMetal_heavy_000.ogg",
@@ -43,6 +51,7 @@ var sfx_vol: float = 1.0
 var _streams: Dictionary = {}
 var _pool: Array[AudioStreamPlayer] = []
 var _idx: int = 0
+var _ambient: AudioStreamPlayer = null
 
 
 func _ready() -> void:
@@ -56,11 +65,24 @@ func _ready() -> void:
 		var p2: String = IMPACT_BASE + str(IMPACT_MAP[k2])
 		if ResourceLoader.exists(p2):
 			_streams[k2] = load(p2) as AudioStream
+	for ka: String in AMBIENT_MAP.keys():
+		var pa: String = AMBIENT_BASE + str(AMBIENT_MAP[ka])
+		if ResourceLoader.exists(pa):
+			var raw: AudioStream = load(pa) as AudioStream
+			if raw is AudioStreamOggVorbis:
+				var looped: AudioStreamOggVorbis = (raw as AudioStreamOggVorbis).duplicate()
+				looped.loop = true
+				_streams[ka] = looped
+			else:
+				_streams[ka] = raw
 	for i: int in 8:
 		var pl := AudioStreamPlayer.new()
 		pl.bus = "SFX"
 		add_child(pl)
 		_pool.append(pl)
+	_ambient = AudioStreamPlayer.new()
+	_ambient.bus = "Music"
+	add_child(_ambient)
 	apply_volumes(master_vol, music_vol, sfx_vol)
 
 
@@ -82,6 +104,28 @@ func play(name: String) -> void:
 	_idx += 1
 	pl.stream = s
 	pl.play()
+
+
+## Ambient loop di bus Music (volume via apply_volumes). Aman bila hilang.
+func play_ambient(name: String) -> void:
+	if _ambient == null:
+		return
+	var s: AudioStream = _streams.get(name) as AudioStream
+	if s == null:
+		return
+	if _ambient.stream == s and _ambient.playing:
+		return
+	_ambient.stream = s
+	_ambient.play()
+
+
+func stop_ambient() -> void:
+	if _ambient != null and _ambient.playing:
+		_ambient.stop()
+
+
+func is_ambient_playing() -> bool:
+	return _ambient != null and _ambient.playing
 
 
 func _to_db(v: float) -> float:

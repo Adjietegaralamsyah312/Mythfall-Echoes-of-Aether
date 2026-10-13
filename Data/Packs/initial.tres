@@ -12,10 +12,10 @@ status = 0
 region_ids = Array[String](["dawnroot_valley", "dawnroot_crypt"])
 download_url = ""
 file_bytes = 0
-installed_bytes = 3369507
+installed_bytes = 5042552
 sha256 = ""
 contents = Array[String](["res://Assets", "res://Scenes", "res://Scripts", "res://Data", "res://LICENSES", "res://Scenes/World/Main.tscn", "res://Scenes/World/DawnrootValley.tscn", "res://Scenes/Dungeon/DawnrootCrypt.tscn", "res://Scenes/MainMenu/MainMenu.tscn", "res://Data/Regions/dawnroot_valley.tres", "res://Data/Regions/dawnroot_crypt.tres"])
 min_app_version = "0.1.0"
-description = "Paket bawaan: menu, gameplay awal, Dawnroot Valley + Crypt, UI, efek, audio awal + file E2 Emberfall (masih ikut instalasi; subset 318047 B tercatat di emberfall pack — total union = angka ini, tanpa double-count). installed_bytes = du -scb Assets+Scenes+Scripts+Data+LICENSES per 2026-10-13 (termasuk .import editor; tanpa .git/.godot). Tanpa sha256 paket tunggal — hash per-zip ada di ASSET_MANIFEST.json."
+description = "Paket bawaan: menu, gameplay awal, Dawnroot Valley + Crypt, UI, efek, audio awal + file E2 Emberfall + file F2 Luminara (subset 318047 B emberfall + 1667496 B luminara tercatat di pack masing-masing — total union = angka ini, tanpa double-count). installed_bytes = du -scb Assets+Scenes+Scripts+Data+LICENSES per 2026-10-13 (termasuk .import editor; tanpa .git/.godot). Tanpa sha256 paket tunggal — hash per-zip ada di ASSET_MANIFEST.json."
 dependencies = Array[String]([])
 license_note = "CC0 Kenney; lihat ASSET_CREDITS.md + ASSET_MANIFEST.json."

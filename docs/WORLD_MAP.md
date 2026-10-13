@@ -2,7 +2,7 @@
 
 Sumber: `Data/Regions/*.tres`, `Scenes/World/DawnrootValley.tscn`, `Scenes/Dungeon/DawnrootCrypt.tscn`, `Scenes/World/EmberfallHighlands.tscn`, `Scripts/World/Main.gd` + `RegionManager.gd`, `Data/Packs/*.tres`, `docs/CONTENT_PACKS.md`. Satuan: piksel Godot, origin kiri-atas.
 
-> Emberfall kini playable lokal; 4 ekspansi lain tetap rencana. Lihat status §4.
+> Emberfall + Luminara kini playable lokal; 3 ekspansi lain tetap rencana. Lihat status §4.
 
 ## 1. Dawnroot Valley — PLAYABLE
 
@@ -33,6 +33,14 @@ Valley `(640,150)` → Crypt `(640,560)` → Elite `(640,200)` → Chest `(640,1
 - Encounter: `SkeletonSpawn1 (700,600)`, `SkeletonSpawn2 (820,650)`, `EmberSpawn1 (1200,500)`, `EmberSpawn2 (1320,560)`, `EliteSpawn1 (1260,400)` → `EmberWisp` (ranged) via `ENCOUNTER_MAP`.
 - Chest: `EmberChest (960,250)` = 3 shard + 1 potion, sekali-ambil. Checkpoint: `(960,900)` 140×80.
 
+## 3c. Luminara Desert — PLAYABLE LOKAL
+
+- Batas: `limit 0,0,1920,1080` (`luminara_desert.tres`). Spawn + checkpoint `(960,900)`.
+- Portal masuk: Valley `LuminaraPortal (1350,150)` → `travel_to(luminara_desert)`; keluar: Luminara `ExitPortal (960,1000)` → Valley `(640,300)`.
+- Encounter: `SkeletonSpawn1 (700,600)`, `SkeletonSpawn2 (820,650)`, `WispSpawn1 (1200,500)`, `EmberSpawn1 (1320,560)` → skeleton/wisp/ember via `ENCOUNTER_MAP` (komposisi beda vs Emberfall).
+- Landmark: `SunkenGate Gerbang Terbenam (960,350)` + oasis `(1300,600)` + reruntuhan pilar.
+- Chest: `LuminaraChest (960,250)` = 2 shard + 1 helm, sekali-ambil. Checkpoint: `(960,900)` 140×80. Tanpa musik (ambient gua tak cocok gurun; TERBUKA jujur).
+
 ## 4. Status region
 
 | Region | Status | Bukti |
@@ -40,9 +48,9 @@ Valley `(640,150)` → Crypt `(640,560)` → Elite `(640,200)` → Chest `(640,1
 | `dawnroot_valley` | PLAYABLE | `.tres` + `DawnrootValley.tscn` + `initial` BUILT_IN |
 | `dawnroot_crypt` | PLAYABLE | `.tres` + `DawnrootCrypt.tscn` + `initial` BUILT_IN |
 | `emberfall_highlands` | PLAYABLE LOKAL (UNAVAILABLE-unduh) | `emberfall_highlands.tres` + `EmberfallHighlands.tscn` + portal dua arah Valley (1000,150) <-> Exit (960,1000) |
-| `luminara_desert` | RENCANA | hanya di `luminara.tres`, tanpa scene |
+| `luminara_desert` | PLAYABLE LOKAL (UNAVAILABLE-unduh) | `luminara_desert.tres` + `LuminaraDesert.tscn` + portal dua arah Valley (1350,150) <-> Exit (960,1000) |
 | `veilwood_forest` | RENCANA | hanya di `veilwood.tres`, tanpa scene |
 | `azure_shattercoast` | RENCANA | hanya di `azure.tres`, tanpa scene |
 | `aether_crown` | RENCANA (endgame) | hanya di `aether_crown.tres`, tanpa scene |
 
-Paket: `initial` (BUILT_IN, 3.369.507 B union, termasuk subset Emberfall 318.047 B) vs 4 paket ekspansi UNAVAILABLE + `emberfall` UNAVAILABLE-unduh tapi playable lokal. Jangan hitung `.git`/`.godot`/arsip tak terpakai sebagai konten. Penuh: `CONTENT_PACKS.md`.
+Paket: `initial` (BUILT_IN, 5.042.552 B union, termasuk subset Emberfall 318.047 B + Luminara 1.667.496 B) vs 3 paket ekspansi UNAVAILABLE + `emberfall`/`luminara` UNAVAILABLE-unduh tapi playable lokal. Jangan hitung `.git`/`.godot`/arsip tak terpakai sebagai konten. Penuh: `CONTENT_PACKS.md`.

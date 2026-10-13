@@ -5,8 +5,9 @@ extends SceneTree
 # ponytail: assert manual; upgrade path GUT bila suite membesar.
 
 const TOL: int = 16384
-const EXP_INITIAL: int = 3369507
+const EXP_INITIAL: int = 5042552
 const EXP_EMBER: int = 318047
+## F3: luminara terisi (v0.1.0); 3 paket lain tetap rencana.
 
 var _fail: int = 0
 
@@ -70,8 +71,18 @@ func _run() -> void:
 				sub = true
 		_check(sub, "emberfall subset initial: " + c3)
 	_check(em.installed_bytes < ini.installed_bytes, "emberfall < initial (subset, total=initial)")
-	# --- 4 paket lain tetap rencana ---
-	for pid2: String in ["luminara", "veilwood", "azure", "aether_crown"]:
+	# --- luminara F3: lokal-terpasang, belum-bisa-diunduh (pola E3) ---
+	var lu: PackDef = reg.get_pack("luminara")
+	_check(lu != null and lu.status == PackDef.Status.UNAVAILABLE, "luminara UNAVAILABLE")
+	_check(lu.file_bytes == -1 and lu.sha256.strip_edges().is_empty(), "luminara file_bytes -1 + sha kosong")
+	_check(lu.version == "0.1.0", "luminara v0.1.0")
+	_check(absi(lu.installed_bytes - 1667496) <= TOL, "luminara %d ~= du 1667496" % lu.installed_bytes)
+	_check(lu.contents.size() == 6, "luminara 6 contents (dapat %d)" % lu.contents.size())
+	_check(lu.region_ids.has("luminara_desert"), "luminara region luminara_desert")
+	for c4: String in lu.contents:
+		_check(_exists_res(c4), "luminara contents ada: " + c4)
+	# --- 3 paket lain tetap rencana ---
+	for pid2: String in ["veilwood", "azure", "aether_crown"]:
 		var q: PackDef = reg.get_pack(pid2)
 		_check(q != null and q.status == PackDef.Status.UNAVAILABLE, pid2 + " UNAVAILABLE")
 		_check(q.file_bytes == -1 and q.installed_bytes == -1 and q.contents.is_empty(), pid2 + " -1 + kosong")

@@ -6,9 +6,9 @@ Sistem manifest paket konten. Unduh/instal/verifikasi = D2 (belum ada).
 
 | pack_id | Isi | Status | Ukuran aktual |
 |---|---|---|---|
-| `initial` | Menu, gameplay awal, Dawnroot Valley + Crypt, UI, efek, audio awal (+ file E2, subset Emberfall di dalam) | BUILT_IN | 3.369.507 B terpasang (`du`, 2026-10-13) |
+| `initial` | Menu, gameplay awal, Dawnroot Valley + Crypt, UI, efek, audio awal (+ file E2/F2, subset Emberfall+Luminara di dalam) | BUILT_IN | 5.042.552 B terpasang (`du`, 2026-10-13) |
 | `emberfall` | Emberfall Highlands playable lokal (portal dua arah, 5 encounter, chest, checkpoint) — BELUM bisa diunduh | UNAVAILABLE* | 318.047 B terpasang lokal; unduhan -1/URL kosong |
-| `luminara` | Rencana: Luminara Desert | UNAVAILABLE | -1 (belum ada) |
+| `luminara` | Luminara Desert playable lokal (portal dua arah, 4 encounter, chest, checkpoint) — BELUM bisa diunduh | UNAVAILABLE* | 1.667.496 B terpasang lokal; unduhan -1/URL kosong |
 | `veilwood` | Rencana: Veilwood Forest | UNAVAILABLE | -1 (belum ada) |
 | `azure` | Rencana: Azure Shattercoast | UNAVAILABLE | -1 (belum ada) |
 | `aether_crown` | Rencana: Aether Crown (endgame) | UNAVAILABLE | -1 (belum ada) |
@@ -31,15 +31,17 @@ sinyal `pack_list_changed`).
 | Metrik | Byte aktual | Catatan |
 |---|---|---|
 | Aset Kenney zip (10 paket) | 6.026.122 | `ASSET_MANIFEST.json` (5 lama 2.284.476 + 5 baru 3.741.646) |
+| Aset F1 file CC0 (4 file) | 1.666.321 | floor 6.706 + Lava.zip 30.214 + ambient 1.626.352 + sand 3.049 (sumber; runtime 1.656.662 + scene/script/data 10.834) |
 | Emberfall subset runtime | 318.047 | Caves 32.172 + Urban 18.270 + Foliage 171.275 + RPGExpansion 12.666 + Impacts 70.378 + scene/script/data 13.286 (`du`) |
-| Initial Pack terpasang (union) | 3.369.507 | `du -scb Assets+Scenes+Scripts+Data+LICENSES`; sudah termasuk subset Emberfall (tanpa double-count) |
-| Total konten nyata siap main | 3.369.507 | = Initial union (`python3 Tools/count_content.py`) |
-| Ekspansi siap (Emberfall) | 318.047 | subset di atas; 4 paket lain 0 B |
+| Luminara subset runtime | 1.667.496 | Emberfall-lava 25.870 + Luminara-sand 4.012 + Ambience 1.626.780 + scene 9.235 + script 1.153 + region 446 (`du`) |
+| Initial Pack terpasang (union) | 5.042.552 | `du -scb Assets+Scenes+Scripts+Data+LICENSES`; sudah termasuk subset Emberfall+Luminara (tanpa double-count) |
+| Total konten nyata siap main | 5.042.552 | = Initial union (`python3 Tools/count_content.py`) |
+| Ekspansi siap (Emberfall+Luminara) | 1.985.543 | 318.047 + 1.667.496 (subset di atas; 3 paket lain 0 B) |
 | `Sources/` staging | 13.188.610 | arsip + extracted E1 — BUKAN konten, jangan hitung |
-| Source proyek (tanpa `.git`/`.godot`) | ~3,4 MB | `.git` 2.789.334 + `.godot` 8.023.199 BUKAN konten |
+| Source proyek (tanpa `.git`/`.godot`) | ~5,0 MB | `.git` 2.789.334 + `.godot` 8.023.199 BUKAN konten |
 | APK lokal | 0 (belum ada) | `Build/` kosong; klaim 29 MB sebelumnya TIDAK terbukti di disk |
-| Target distribusi awal | 100.000.000 | **kurang 96.630.493 B (~96,6 MB)** |
-| Target jangka panjang | 2–3 GB lintas paket | 4 paket ekspansi masih -1 (0 B nyata) |
+| Target distribusi awal | 100.000.000 | **kurang 94.957.448 B (~95,0 MB)** |
+| Target jangka panjang | 2–3 GB lintas paket | 3 paket ekspansi masih -1 (0 B nyata) |
 
 Toleransi: angka manifest bisa meleset ±16 KB karena file `.import`
 hasil editor dan manifest itu sendiri — bukan dummy, jelaskan bila ditanya.
@@ -98,4 +100,12 @@ UNAVAILABLE sampai ada aset CC0 terverifikasi + manifest nyata (lihat §5).
 - Audio: `AudioManager.IMPACT_MAP` (footstep_ember/hit_metal/mine/punch) + footstep loop di `Main._process` khusus Emberfall.
 - Manifest: `Data/Packs/emberfall.tres` v0.1.0, `installed_bytes 318047`, `contents` 10 path runtime E2, `license_note` CC0; `download_url ""`, `file_bytes -1`, `sha256 ""`, status tetap UNAVAILABLE (unduh ditolak jujur; main offline tetap jalan).
 - Hitung: `python3 Tools/count_content.py` → union 3.369.507 B, selisih 96.630.493 B ke 100 MB. `Sources/` 13.188.610 B staging tidak dihitung.
-- Hosting tersisa: zip per-pack + URL + sha256 server + upload (tanpa karang URL); lalu status AVAILABLE + `file_bytes` nyata. 4 region lain tetap RENCANA (0 B).
+- Hosting tersisa: zip per-pack + URL + sha256 server + upload (tanpa karang URL); lalu status AVAILABLE + `file_bytes` nyata. 3 region lain tetap RENCANA (0 B).
+
+## 9. Luminara F3 — playable lokal, belum hosting (2026-10-13)
+
+- Scene: `Scenes/World/LuminaraDesert.tscn` (1920×1080, sand desert_sand CC0 + paver/batu hangat existing via modulate + reruntuhan + Gerbang Terbenam + oasis + checkpoint + ExitPortal + Bounds) + script `Scripts/World/LuminaraDesert.gd` (pasif, pola B4).
+- Region: `Data/Regions/luminara_desert.tres` (`spawn/checkpoint 960,900`); portal dua arah: Valley `LuminaraPortal (1350,150)` → Luminara checkpoint; Luminara `ExitPortal (960,1000)` → Valley `(640,300)`.
+- Aset F1: lava strip 17.212 + floor 6.706 (Emberfall dir, dipakai Emberfall anim/dekor) + ambient 1.626.352 (Emberfall/crypt; desert tanpa musik TERBUKA jujur) + sand 3.049 (Luminara). OGA tanpa file lisensi → URL+CC0 di manifest, tanpa karang file.
+- Manifest: `Data/Packs/luminara.tres` v0.1.0, `installed_bytes 1667496`, `contents` 6 path runtime F2, `license_note` CC0; `download_url ""`, `file_bytes -1`, `sha256 ""`, status tetap UNAVAILABLE (unduh ditolak jujur; main offline tetap jalan — pola E3).
+- Hitung: `python3 Tools/count_content.py` → union 5.042.552 B, selisih 94.957.448 B ke 100 MB. 32px-zip DITOLAK + Foozle GAGAL: hanya SOURCING_LOG §6, TIDAK masuk manifest.

@@ -49,9 +49,9 @@ Scene: `Scenes/Enemies/Slime|Skeleton|Wisp|EliteDawnroot.tscn`. Perilaku: `Enemy
 - `GameUI.gd` (dibangun via kode): HUD HP/Stamina/Lv + tracker 1 quest + tombol minimize, Quest Log (Tersedia/Aktif/Selesai + kosong jujur), DialoguePanel (nama + Lanjut/Tutup, sentuh + keyboard), pause, settings, minimap kode (`draw_circle`/`draw_arc`).
 - `ContentPacksPanel`: 6 paket + ukuran butuh/terpasang + Unduh disable beralasan + progress + Kembali. Lihat `CONTENT_PACKS.md`.
 
-## 8. Region — [TERAPKAN 3 / PLANNED 4]
+## 8. Region — [TERAPKAN 4 / PLANNED 3]
 
-Playable: `dawnroot_valley` (2560×1440) + `dawnroot_crypt` (1280×720, `dungeon_id dawnroot_crypt`) + `emberfall_highlands` (1920×1080, playable lokal E2; portal dua arah Valley↔Emberfall; quest Emberfall masih **[PLANNED]**). **[PLANNED]** `luminara_desert`, `veilwood_forest`, `azure_shattercoast`, `aether_crown` — hanya `region_ids` di `Data/Packs/*.tres`, status UNAVAILABLE `-1`, tanpa scene. Penuh: `WORLD_MAP.md`.
+Playable: `dawnroot_valley` (2560×1440) + `dawnroot_crypt` (1280×720, `dungeon_id dawnroot_crypt`) + `emberfall_highlands` (1920×1080, playable lokal E2; portal dua arah Valley↔Emberfall; quest Emberfall masih **[PLANNED]**) + `luminara_desert` (1920×1080, playable lokal F2; portal dua arah Valley↔Luminara; quest Luminara masih **[PLANNED]**). **[PLANNED]** `veilwood_forest`, `azure_shattercoast`, `aether_crown` — hanya `region_ids` di `Data/Packs/*.tres`, status UNAVAILABLE `-1`, tanpa scene. Penuh: `WORLD_MAP.md`.
 
 ## 9. Save — [TERAPKAN]
 
@@ -59,7 +59,7 @@ Playable: `dawnroot_valley` (2560×1440) + `dawnroot_crypt` (1280×720, `dungeon
 
 ## 10. Audio — [TERAPKAN SFX / NOT IMPLEMENTED musik]
 
-SFX dari `.ogg` nyata (`AUDIO_MAP` di `AudioManager.gd`, pool 8 player, bus Master/Music/SFX). **[NOT IMPLEMENTED]** musik ambient — `Preview.ogg` hanya demo mashup, bukan loop; kebutuhan loop desa/hutan/dungeon CC0 masih terbuka.
+SFX dari `.ogg` nyata (`AUDIO_MAP` di `AudioManager.gd`, pool 8 player, bus Master/Music/SFX). Ambient gua nyata F2 (`AMBIENT_MAP ambient_ember` 94,3 dtk, play di Emberfall/crypt, stop di valley/desert). **[NOT IMPLEMENTED]** musik desa/hutan/gurun — desert tanpa musik (TERBUKA jujur); kebutuhan loop desa/hutan CC0 masih terbuka.
 
 ## 11. Uji & batas jujur
 

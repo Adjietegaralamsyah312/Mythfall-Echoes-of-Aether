@@ -12,6 +12,7 @@ const SPAWN_POS: Vector2 = Vector2(640, 1150)
 const VALLEY_ID: String = "dawnroot_valley"
 const CRYPT_ID: String = "dawnroot_crypt"
 const EMBERFALL_ID: String = "emberfall_highlands"
+const LUMINARA_ID: String = "luminara_desert"
 const VALLEY_RETURN_POS: Vector2 = Vector2(640, 300)
 const SLIME_SCENE: String = "res://Scenes/Enemies/Slime.tscn"
 const SKELETON_SCENE: String = "res://Scenes/Enemies/Skeleton.tscn"
@@ -36,6 +37,7 @@ const REGION_PATHS: Array[String] = [
 	"res://Data/Regions/dawnroot_valley.tres",
 	"res://Data/Regions/dawnroot_crypt.tres",
 	"res://Data/Regions/emberfall_highlands.tres",
+	"res://Data/Regions/luminara_desert.tres",
 ]
 ## Marker valley/crypt -> scene musuh (legacy EnemySpawn* = slime/skeleton/wisp).
 const ENCOUNTER_MAP: Dictionary = {
@@ -196,6 +198,12 @@ func _after_load_region(region_id: String, node: Node2D) -> void:
 	_apply_camera_limits(def)
 	_connect_region_signals(node)
 	_restore_chests(region_id, node)
+	# ponytail: ambient gua (Emberfall/crypt); valley/desert tanpa musik.
+	if audio != null:
+		if region_id == EMBERFALL_ID or region_id == CRYPT_ID:
+			audio.play_ambient("ambient_ember")
+		else:
+			audio.stop_ambient()
 	var spawned: int = _spawn_region_encounters(node)
 	if spawned <= 0:
 		_spawn_test_enemies()

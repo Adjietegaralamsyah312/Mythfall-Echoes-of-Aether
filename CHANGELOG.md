@@ -41,3 +41,8 @@ Hanya capaian terverifikasi di file + `git log`. Rencana tidak dicatat sebagai s
 
 - E2 (belum commit): Emberfall Highlands playable lokal (`EmberfallHighlands.tscn`, `ember_wisp`, portal dua arah, `IMPACT_MAP`), 5 dir runtime baru + 5 `LICENSES/`.
 - E3 (belum commit): `emberfall.tres` v0.1.0 (318.047 B, 10 contents, tetap UNAVAILABLE-unduh) + `initial.tres` 3.369.507 B union; `Tools/count_content.py` union 3.369.507 B → kurang 96.630.493 B ke 100 MB; `ASSET_MANIFEST.json` 10 paket; `Tests/E3_PackTest.gd`; docs Emberfall playable.
+
+## Uncommitted F2+F3 (2026-10-13, JANGAN baca sebagai commit)
+
+- F2 (belum commit): Luminara Desert playable lokal (`LuminaraDesert.tscn` 9.235 B, `LuminaraDesert.gd` 1.134 B, `luminara_desert.tres`, portal Valley 1350,150 dua arah, 4 encounter, chest 2 shard+1 helm, checkpoint autosave) + lava strip 17.212/floor 6.706 (dekor tanpa damage) + ambient 1.626.352 (Emberfall/crypt; desert tanpa musik) + sand 3.049; `Tests/F2_LuminaraTest.gd`.
+- F3 (belum commit): `luminara.tres` v0.1.0 (1.667.496 B, 6 contents, tetap UNAVAILABLE-unduh pola E3) + `initial.tres` 5.042.552 B union; `ASSET_MANIFEST.json` 14 paket (4 baru F1, OGA tanpa file lisensi → URL+CC0); `Tests/F3_PackTest.gd`; docs Luminara playable; `Tools/count_content.py` tanpa ubah (luminara sudah di daftar pack).

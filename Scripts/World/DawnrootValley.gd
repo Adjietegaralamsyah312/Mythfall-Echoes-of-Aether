@@ -9,6 +9,7 @@ signal request_enter_dungeon(dungeon_id: String)
 const REGION_ID: String = "dawnroot_valley"
 const DUNGEON_ID: String = "dawnroot_crypt"
 const EMBER_ID: String = "emberfall_highlands"
+const LUMINARA_ID: String = "luminara_desert"
 
 
 func _ready() -> void:
@@ -19,6 +20,9 @@ func _ready() -> void:
 	var ember: Area2D = get_node_or_null("EmberPortal") as Area2D
 	if ember != null:
 		ember.body_entered.connect(_on_ember_body)
+	var luminara: Area2D = get_node_or_null("LuminaraPortal") as Area2D
+	if luminara != null:
+		luminara.body_entered.connect(_on_luminara_body)
 
 
 func _on_entrance_body(b: Node2D) -> void:
@@ -29,3 +33,8 @@ func _on_entrance_body(b: Node2D) -> void:
 func _on_ember_body(b: Node2D) -> void:
 	if b.is_in_group("player"):
 		request_enter_dungeon.emit(EMBER_ID)
+
+
+func _on_luminara_body(b: Node2D) -> void:
+	if b.is_in_group("player"):
+		request_enter_dungeon.emit(LUMINARA_ID)

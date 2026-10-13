@@ -31,3 +31,15 @@ BUKAN konten. E2 hanya salin subset hemat ke runtime (jangan semua isi):
 - rpg-base DITOLAK (duplikat), polyhaven DITOLAK (visual 3D), roguelike-rpg-pack DILEWATI (sudah ada) — bukti di `Sources/SOURCING_LOG.md` §1.
 
 Hitung ulang via `python3 Tools/count_content.py` (union anti-double-count; toleransi ±16 KB untuk `.import`/manifest itu sendiri).
+
+## F1→F2: Sources → runtime (Luminara + lava/ambient, 2026-10-13)
+
+`Sources/` = staging ignore-git, BUKAN konten. F2 hanya salin subset hemat ke runtime:
+
+- `Sources/floor-is-lava/floor_is_lava.png` → `Assets/Environment/Emberfall/` (crust static; OGA CC0 Kipperfalcon, tanpa file lisensi — URL+CC0 di manifest)
+- `Sources/lpc-lava-16x16-45f/lava_spr_strip45.png` → `Assets/Environment/Emberfall/` (strip 45f utama; LPC CC0 davesch; varian 32px DITOLAK — hanya SOURCING_LOG §6)
+- `Sources/dungeon-ambience-loop/dungeon_ambient_1.ogg` → `Assets/Audio/Ambience/` (loop via flag AudioStreamOgg; OGA CC0 JaggedStone)
+- `Sources/desert-sand-16x16/voda_pesok_trava_revision_2.png` → `Assets/Environment/Luminara/desert_sand.png` (ganti nama, byte+sha identik; OGA CC0 Demetrius)
+- foozle GAGAL (purchase JS + 404) → TIDAK ADA runtime; CC0 tercatat bila nanti unduh manual via browser.
+
+Hitung: `luminara.tres` 6 contents = 1.667.496 B; `initial.tres` union baru 5.042.552 B.
