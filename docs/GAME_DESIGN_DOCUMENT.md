@@ -45,7 +45,7 @@ Scene: `Scenes/Enemies/Slime|Skeleton|Wisp|EliteDawnroot.tscn`. Perilaku: `Enemy
 
 ## 7. UI — [TERAPKAN]
 
-- `MainMenu.tscn` + `MainMenu.gd`: New Game (navigasi nyata), Continue (disable + status jujur bila tak ada save), Settings (Master/Musik/SFX + quality + sensitivitas, tersimpan), Credits (CC0 Kenney + catatan musik belum ada), Quit, tombol "Paket Konten".
+- `MainMenu.tscn` + `MainMenu.gd`: New Game (navigasi nyata), Continue (disable + status jujur bila tak ada save), Settings (Master/Musik/SFX + quality + sensitivitas, tersimpan), Credits (CC0 Kenney/OGA + musik CC0 BULK-001), Quit, tombol "Paket Konten".
 - `GameUI.gd` (dibangun via kode): HUD HP/Stamina/Lv + tracker 1 quest + tombol minimize, Quest Log (Tersedia/Aktif/Selesai + kosong jujur), DialoguePanel (nama + Lanjut/Tutup, sentuh + keyboard), pause, settings, minimap kode (`draw_circle`/`draw_arc`).
 - `ContentPacksPanel`: 6 paket + ukuran butuh/terpasang + Unduh disable beralasan + progress + Kembali. Lihat `CONTENT_PACKS.md`.
 
@@ -57,10 +57,10 @@ Playable: `dawnroot_valley` (2560×1440) + `dawnroot_crypt` (1280×720, `dungeon
 
 `SaveManager.gd`: `user://mythfall_save.cfg`, `SAVE_VERSION 1`, `ConfigFile` seksi player/quest/region/settings/meta, save manual + autosave saat `checkpoint_reached`, load validasi versi + `pos` + fallback `{}` + `load_failed` beralasan, `clear`/`has_save`. Tanpa slot/cloud.
 
-## 10. Audio — [TERAPKAN SFX / NOT IMPLEMENTED musik]
+## 10. Audio — [TERAPKAN SFX + musik BULK-001]
 
-SFX dari `.ogg` nyata (`AUDIO_MAP` di `AudioManager.gd`, pool 8 player, bus Master/Music/SFX). Ambient gua nyata F2 (`AMBIENT_MAP ambient_ember` 94,3 dtk, play di Emberfall/crypt, stop di valley/desert). **[NOT IMPLEMENTED]** musik desa/hutan/gurun — desert tanpa musik (TERBUKA jujur); kebutuhan loop desa/hutan CC0 masih terbuka.
+SFX dari `.ogg` nyata (`AUDIO_MAP` di `AudioManager.gd`, pool 8 player, bus Master/Music/SFX). Ambient gua nyata F2 (`AMBIENT_MAP ambient_ember` 94,3 dtk, play di Emberfall/crypt). Musik CC0 BULK-001: 16 trek `MusicLibrary` (8 WAV drakzlin + 8 MP3 troubadour) via `MusicCatalog` (auto-BGM menu/valley/luminara; battle/dark/chiptune katalog opsional) + panel Musik pemain + anti-overlap. Desert/gurun: BGM `homestead` (TERTUTUP jujur via trek cocok, bukan ambient gua).
 
 ## 11. Uji & batas jujur
 
-Headless + soak dilaporkan hijau di `docs/ANDROID_TEST_PLAN.md` (B2/B3/B4/B5 + soak Main 3600 frame 0 error) — uji editor/perangkat fisik tetap wajib sebelum klaim rilis. APK lokal belum ada (`Build/` kosong); selisih target 100 MB jujur di `CONTENT_PACKS.md` §3 dan `CHANGELOG.md`. Tidak ada klaim "teruji di perangkat" di sesi ini.
+Headless + soak dilaporkan hijau di `docs/ANDROID_TEST_PLAN.md` (B2/B3/B4/B5 + soak Main 3600 frame 0 error) — uji editor/perangkat fisik tetap wajib sebelum klaim rilis. APK lokal belum ada (`Build/` kosong); total konten 127.584.207 B (LEBIH target 100 MB, dedup SHA-256) di `CONTENT_PACKS.md` §10 dan `CHANGELOG.md`. Tidak ada klaim "teruji di perangkat" di sesi ini.

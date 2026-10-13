@@ -5,8 +5,8 @@ extends SceneTree
 # ponytail: assert manual; upgrade path GUT bila suite membesar.
 
 const TOL: int = 16384
-const EXP_INITIAL: int = 5042552
-const EXP_EMBER: int = 318047
+const EXP_INITIAL: int = 127584207
+const EXP_EMBER: int = 329853
 ## F3: luminara terisi (v0.1.0); 3 paket lain tetap rencana.
 
 var _fail: int = 0
@@ -57,7 +57,7 @@ func _run() -> void:
 	_check(em.file_bytes == -1 and em.sha256.strip_edges().is_empty(), "emberfall file_bytes -1 + sha kosong")
 	_check(em.version == "0.1.0", "emberfall v0.1.0")
 	_check(absi(em.installed_bytes - EXP_EMBER) <= TOL, "emberfall %d ~= du %d" % [em.installed_bytes, EXP_EMBER])
-	_check(em.contents.size() == 10, "emberfall 10 contents (dapat %d)" % em.contents.size())
+	_check(em.contents.size() == 11, "emberfall 11 contents (dapat %d)" % em.contents.size())
 	_check(em.region_ids.size() == 1 and em.region_ids.has("emberfall_highlands"), "emberfall region_ids tunggal")
 	_check(em.license_note.contains("CC0"), "emberfall license CC0")
 	for c2: String in em.contents:
@@ -76,8 +76,8 @@ func _run() -> void:
 	_check(lu != null and lu.status == PackDef.Status.UNAVAILABLE, "luminara UNAVAILABLE")
 	_check(lu.file_bytes == -1 and lu.sha256.strip_edges().is_empty(), "luminara file_bytes -1 + sha kosong")
 	_check(lu.version == "0.1.0", "luminara v0.1.0")
-	_check(absi(lu.installed_bytes - 1667496) <= TOL, "luminara %d ~= du 1667496" % lu.installed_bytes)
-	_check(lu.contents.size() == 6, "luminara 6 contents (dapat %d)" % lu.contents.size())
+	_check(absi(lu.installed_bytes - 1672604) <= TOL, "luminara %d ~= du 1672604" % lu.installed_bytes)
+	_check(lu.contents.size() == 7, "luminara 7 contents (dapat %d)" % lu.contents.size())
 	_check(lu.region_ids.has("luminara_desert"), "luminara region luminara_desert")
 	for c4: String in lu.contents:
 		_check(_exists_res(c4), "luminara contents ada: " + c4)

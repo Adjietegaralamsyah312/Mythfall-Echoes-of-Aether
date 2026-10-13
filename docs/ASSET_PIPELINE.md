@@ -30,7 +30,7 @@ BUKAN konten. E2 hanya salin subset hemat ke runtime (jangan semua isi):
 - `Sources/impact-sounds/extracted/Audio/footstep_*` + `impactMining_*` + `impactMetal_heavy_*` + `impactPunch_*` → `Assets/Audio/Impacts/`
 - rpg-base DITOLAK (duplikat), polyhaven DITOLAK (visual 3D), roguelike-rpg-pack DILEWATI (sudah ada) — bukti di `Sources/SOURCING_LOG.md` §1.
 
-Hitung ulang via `python3 Tools/count_content.py` (union anti-double-count; toleransi ±16 KB untuk `.import`/manifest itu sendiri).
+Hitung ulang via `python3 Tools/count_content.py` (union dedup SHA-256 isi file — format/salinan sama dihitung sekali; toleransi ±16 KB untuk `.import`/manifest itu sendiri).
 
 ## F1→F2: Sources → runtime (Luminara + lava/ambient, 2026-10-13)
 

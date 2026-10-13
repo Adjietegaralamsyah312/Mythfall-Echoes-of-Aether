@@ -3,13 +3,13 @@ extends SceneTree
 ## Uji: ID unik, contents ada, angka==du (±16384 toleransi .import/manifest),
 ## luminara v0.1.0 lokal-terpasang + portal dua arah Valley<->Luminara +
 ## discovery + checkpoint, registry kompatibel (initial valid, emberfall pola
-## E3 preserved, D2 tolak tetap), manifest 14 item F1.
+## E3 preserved, D2 tolak tetap), manifest 21 item BULK-001.
 # ponytail: assert manual; upgrade path GUT bila suite membesar.
 
 const TOL: int = 16384
-const EXP_INITIAL: int = 5042552
-const EXP_EMBER: int = 318047
-const EXP_LUMINARA: int = 1667496
+const EXP_INITIAL: int = 127584207
+const EXP_EMBER: int = 329853
+const EXP_LUMINARA: int = 1672604
 
 var _fail: int = 0
 
@@ -59,7 +59,7 @@ func _run() -> void:
 	_check(em.file_bytes == -1 and em.sha256.strip_edges().is_empty(), "emberfall file_bytes -1 + sha kosong")
 	_check(em.version == "0.1.0", "emberfall v0.1.0")
 	_check(absi(em.installed_bytes - EXP_EMBER) <= TOL, "emberfall %d ~= du %d" % [em.installed_bytes, EXP_EMBER])
-	_check(em.contents.size() == 10, "emberfall 10 contents (dapat %d)" % em.contents.size())
+	_check(em.contents.size() == 11, "emberfall 11 contents (dapat %d)" % em.contents.size())
 	_check(em.region_ids.size() == 1 and em.region_ids.has("emberfall_highlands"), "emberfall region_ids tunggal")
 	_check(em.license_note.contains("CC0"), "emberfall license CC0")
 	# --- luminara: lokal-terpasang, belum-bisa-diunduh (pola E3) ---
@@ -70,7 +70,7 @@ func _run() -> void:
 	_check(lu.file_bytes == -1 and lu.sha256.strip_edges().is_empty(), "luminara file_bytes -1 + sha kosong")
 	_check(lu.version == "0.1.0", "luminara v0.1.0")
 	_check(absi(lu.installed_bytes - EXP_LUMINARA) <= TOL, "luminara %d ~= du %d" % [lu.installed_bytes, EXP_LUMINARA])
-	_check(lu.contents.size() == 6, "luminara 6 contents (dapat %d)" % lu.contents.size())
+	_check(lu.contents.size() == 7, "luminara 7 contents (dapat %d)" % lu.contents.size())
 	_check(lu.region_ids.size() == 1 and lu.region_ids.has("luminara_desert"), "luminara region_ids tunggal")
 	_check(lu.license_note.contains("CC0"), "luminara license CC0")
 	for c2: String in lu.contents:
@@ -94,7 +94,7 @@ func _run() -> void:
 	# --- manifest 14 item F1 ---
 	var mtxt: String = FileAccess.get_file_as_string("./ASSET_MANIFEST.json")
 	var mj: Dictionary = JSON.parse_string(mtxt) as Dictionary
-	_check(not mj.is_empty() and (mj.get("assets", []) as Array).size() == 14, "manifest 14 item")
+	_check(not mj.is_empty() and (mj.get("assets", []) as Array).size() == 21, "manifest 21 item")
 	var mpaths: Array = []
 	for a: Variant in (mj.get("assets", []) as Array):
 		mpaths.append(str((a as Dictionary).get("path", "")))

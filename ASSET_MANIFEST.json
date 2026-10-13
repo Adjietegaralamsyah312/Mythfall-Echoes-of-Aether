@@ -201,26 +201,166 @@
      "Scripts/UI/AudioManager.gd AMBIENT_MAP ambient_ember + Scripts/World/Main.gd play di emberfall/crypt"
     ]
    },
-   {
-    "path": "Assets/Environment/Luminara/desert_sand.png",
-    "source_url": "https://opengameart.org/content/16x16-tileset-water-grass-and-sand",
-    "zip_url": "https://opengameart.org/sites/default/files/voda_pesok_trava_revision_2.png",
-    "zip_bytes": 3049,
-    "extracted_bytes": 3049,
-    "sha256_zip": "6693fde88de22dfadb7f6bf8c44b158fd4a56ad15e9b47b62359fab2f1c2b799",
-    "license": "CC0",
-    "license_file": "",
-    "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok lisensi halaman; bukti page.html di Sources/desert-sand-16x16/. Kreator: Demetrius. File runtime = revision_2 diganti nama (byte+sha identik).",
-    "runtime_bytes": 4012,
-    "runtime_files": [
-     "Assets/Environment/Luminara/desert_sand.png (sha256 6693fde88de22dfadb7f6bf8c44b158fd4a56ad15e9b47b62359fab2f1c2b799)"
-    ],
-    "used_in_f2": [
-     "Scenes/World/LuminaraDesert.tscn (sand tiles + paver/batu hangat existing)"
-    ]
-   }
-  ],
-  "engine": "4.7.2.stable.termux",
-  "note": "Phase A 5 paket + E1/E2 5 paket Kenney CC0 (10 total) + F1 4 file CC0 OGA/LPC (14 total: floor-is-lava, lpc-lava, dungeon-ambience, desert-sand). Rilis 32px-zip DITOLAK + Foozle GAGAL: hanya di Sources/SOURCING_LOG.md, TIDAK masuk manifest. Runtime F2: lava strip/static + ambient ogg + desert sand + LuminaraDesert.tscn + LuminaraDesert.gd + luminara_desert.tres. Sources/ staging tidak dihitung konten.",
-  "phase": "F3"
+    {
+     "path": "Assets/Environment/Luminara/desert_sand.png",
+     "source_url": "https://opengameart.org/content/16x16-tileset-water-grass-and-sand",
+     "zip_url": "https://opengameart.org/sites/default/files/voda_pesok_trava_revision_2.png",
+     "zip_bytes": 3049,
+     "extracted_bytes": 3049,
+     "sha256_zip": "6693fde88de22dfadb7f6bf8c44b158fd4a56ad15e9b47b62359fab2f1c2b799",
+     "license": "CC0",
+     "license_file": "",
+     "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok lisensi halaman; bukti page.html di Sources/desert-sand-16x16/. Kreator: Demetrius. File runtime = revision_2 diganti nama (byte+sha identik).",
+     "runtime_bytes": 4012,
+     "runtime_files": [
+      "Assets/Environment/Luminara/desert_sand.png (sha256 6693fde88de22dfadb7f6bf8c44b158fd4a56ad15e9b47b62359fab2f1c2b799)"
+     ],
+     "used_in_f2": [
+      "Scenes/World/LuminaraDesert.tscn (sand tiles + paver/batu hangat existing)"
+     ]
+    },
+    {
+     "path": "Assets/Audio/MusicLibrary/Action_A.wav",
+     "source_url": "https://opengameart.org/content/music-loops-0",
+     "zip_url": "https://opengameart.org/sites/default/files/action.zip",
+     "zip_bytes": 15148433,
+     "extracted_bytes": 20778430,
+     "sha256_zip": "41eae80f25312151920900600e4ee567a35ee6aa7e82af8373d7da3becb40212",
+     "license": "CC0",
+     "license_file": "",
+     "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok field-name-field-art-licenses halaman (cc0.png + CC0 + link CC0 1.0); bukti page.html di Sources/music-loops-0/. Kreator: drakzlin. Subset WAV saja (2 trek); varian MP3 se-isi DITOLAK-inklusi (duplikat format, hemat runtime; tetap di Sources sebagai bukti).",
+     "runtime_bytes": 16933968,
+     "runtime_files": [
+      "Assets/Audio/MusicLibrary/Action_A.wav (sha256 1601cf7d0d280101a2634a9cf7b559796d1be04e3036e52e2bd8790200d357c4)",
+      "Assets/Audio/MusicLibrary/Action_B.wav (sha256 903ceb3bd3e714762a7dc885fadca3dc2b88e8727a64900f1f219bc8f7d173a7)"
+     ],
+     "used_in_bulk": [
+      "Scripts/UI/MusicCatalog.gd action_a/action_b (katalog combat/boss opsional) + Scripts/UI/GameUI.gd panel Musik"
+     ]
+    },
+    {
+     "path": "Assets/Audio/MusicLibrary/Battle.wav",
+     "source_url": "https://opengameart.org/content/music-loops-0",
+     "zip_url": "https://opengameart.org/sites/default/files/battle.zip",
+     "zip_bytes": 2931102,
+     "extracted_bytes": 3243952,
+     "sha256_zip": "eeb94dc0585871f648795e5f4376ff64441ba57fce637aedd48e5eb72e02705e",
+     "license": "CC0",
+     "license_file": "",
+     "license_note": "OGA CC0 drakzlin, bukti Sources/music-loops-0/page.html. Subset WAV saja; MP3 se-isi DITOLAK-inklusi (duplikat format).",
+     "runtime_bytes": 2642465,
+     "runtime_files": [
+      "Assets/Audio/MusicLibrary/Battle.wav (sha256 aa41c27de7851a6a6ded5f93a8e35adc66b20398d3ad35a2d9f6653ad9be9c12)"
+     ],
+     "used_in_bulk": [
+      "Scripts/UI/MusicCatalog.gd battle (katalog combat opsional) + GameUI panel Musik"
+     ]
+    },
+    {
+     "path": "Assets/Audio/MusicLibrary/Horror.wav",
+     "source_url": "https://opengameart.org/content/music-loops-0",
+     "zip_url": "https://opengameart.org/sites/default/files/horror.zip",
+     "zip_bytes": 32339023,
+     "extracted_bytes": 34627006,
+     "sha256_zip": "ac85766684a544cb5a6e27abaeabaed18404fbcd34d12e393c8ab0b27c64e38b",
+     "license": "CC0",
+     "license_file": "",
+     "license_note": "OGA CC0 drakzlin, bukti Sources/music-loops-0/page.html. Subset WAV saja (2 trek); MP3 se-isi DITOLAK-inklusi.",
+     "runtime_bytes": 28222538,
+     "runtime_files": [
+      "Assets/Audio/MusicLibrary/Horror.wav (sha256 f4c8c1f39f0ce325fa53d4dacd26d03f7502bd8df52175a5719ad9b73b9f7fa4)",
+      "Assets/Audio/MusicLibrary/Horror_B.wav (sha256 8a5cce0c02358e94723de042e04688f1849103f6bb684747e67ea6a383942469)"
+     ],
+     "used_in_bulk": [
+      "Scripts/UI/MusicCatalog.gd horror/horror_b (katalog crypt/boss opsional) + GameUI panel Musik"
+     ]
+    },
+    {
+     "path": "Assets/Audio/MusicLibrary/chiptune_1B2.wav",
+     "source_url": "https://opengameart.org/content/music-loops-0",
+     "zip_url": "https://opengameart.org/sites/default/files/chiptune_1.zip",
+     "zip_bytes": 37516422,
+     "extracted_bytes": 43281060,
+     "sha256_zip": "cb5f05359049178f7d75703116b4036f565d110cce1f4e21a91f4de3d3f7dbdb",
+     "license": "CC0",
+     "license_file": "",
+     "license_note": "OGA CC0 drakzlin, bukti Sources/music-loops-0/page.html. Subset WAV saja (2 trek); MP3 se-isi DITOLAK-inklusi. Kategori chiptune = katalog opsional SAJA, JANGAN auto-BGM region.",
+     "runtime_bytes": 35277926,
+     "runtime_files": [
+      "Assets/Audio/MusicLibrary/chiptune_1B2.wav (sha256 b83653208929fc7273b3097a9156d1c4e275af92f01f7e2a09ada8635493324b)",
+      "Assets/Audio/MusicLibrary/chiptune_1C2.wav (sha256 76054c52fabf450aeb082c287fc6cc4a2efab2071845f8db3186934653d0f3f6)"
+     ],
+     "used_in_bulk": [
+      "Scripts/UI/MusicCatalog.gd chiptune_1b2/chiptune_1c2 (opsional) + GameUI panel Musik"
+     ]
+    },
+    {
+     "path": "Assets/Audio/MusicLibrary/chiptune_2.wav",
+     "source_url": "https://opengameart.org/content/music-loops-0",
+     "zip_url": "https://opengameart.org/sites/default/files/chiptune_2.zip",
+     "zip_bytes": 13586936,
+     "extracted_bytes": 14714066,
+     "sha256_zip": "f0f87bbe8d40873449ce6dd51e8bb04bcc316adeeb7b5056354ea9f14fbf8017",
+     "license": "CC0",
+     "license_file": "",
+     "license_note": "OGA CC0 drakzlin, bukti Sources/music-loops-0/page.html. Subset WAV saja; MP3 se-isi DITOLAK-inklusi. Katalog opsional SAJA.",
+     "runtime_bytes": 11992494,
+     "runtime_files": [
+      "Assets/Audio/MusicLibrary/chiptune_2.wav (sha256 ce2f976cc8aa4386f8a7ca33f1acf9e3cb53edbc9c944dc27097bb6b48b9a9db)"
+     ],
+     "used_in_bulk": [
+      "Scripts/UI/MusicCatalog.gd chiptune_2 (opsional) + GameUI panel Musik"
+     ]
+    },
+    {
+     "path": "Assets/Audio/MusicLibrary (fantasy-song-pack-v1, 8 MP3)",
+     "source_url": "https://opengameart.org/content/fantasy-song-pack-volume-1",
+     "zip_url": "https://opengameart.org/content/fantasy-song-pack-volume-1 (8 file MP3 individual, bukan zip; URL per-file ADA-DI-HTML)",
+     "zip_bytes": 27449343,
+     "extracted_bytes": 27449343,
+     "sha256_zip": "",
+     "license": "CC0",
+     "license_file": "",
+     "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok lisensi halaman; bukti page.html di Sources/fantasy-song-pack-v1/. Kreator: troubadour. 8 MP3 individual (ukuran byte persis metadata length halaman); sha per-file di runtime_files. Semua 8 dipakai (fantasy cocok menu/valley/luminara).",
+     "runtime_bytes": 27452473,
+     "runtime_files": [
+      "Assets/Audio/MusicLibrary/back_to_nature.mp3 (sha256 0828819e80e4053e1d5aeb9a4ac0f0a408faa00baee56c1ca95b817bcd53f243)",
+      "Assets/Audio/MusicLibrary/bells_of_winter.mp3 (sha256 4dd6866f5656be615d3350c834afde2a178db9bb39aa2eacb44175a5a1d78891)",
+      "Assets/Audio/MusicLibrary/fairy_lights.mp3 (sha256 611b9b954402fc39b3e09056be3aebe29b31d0fca9c8ba56bb9ccbef4e505c3d)",
+      "Assets/Audio/MusicLibrary/homestead.mp3 (sha256 b6ce65fceb9373f32697ed27455ed995fa03a77649b04a6f3e86a0243d25d4b3)",
+      "Assets/Audio/MusicLibrary/jaunt.mp3 (sha256 2ae658c0dc91b731b0c27f7a7782f081286fd8ea1b40558f09eaa40d54a77bb5)",
+      "Assets/Audio/MusicLibrary/snow_day.mp3 (sha256 d86de22290751de924068c5203ac82f11bffaa704365622d028211c29498356f)",
+      "Assets/Audio/MusicLibrary/springly_sprigs.mp3 (sha256 5699d453006964fc9b46ff0c5ca3c1c98d7e972e8bbdf91c9f2eab321fa56b1a)",
+      "Assets/Audio/MusicLibrary/wandering_woodlands.mp3 (sha256 122c6726939e0358b916828fdf66fb275d88f4033562adfbe1c99b63803c6559)"
+     ],
+     "used_in_bulk": [
+      "Scripts/UI/MusicCatalog.gd 8 trek fantasy + AudioManager auto-BGM menu/valley/luminara + MainMenu BGM + GameUI panel Musik"
+     ]
+    },
+    {
+     "path": "Assets/Environment/Scorched + DesertDebris (tiny-rpg-forest subset)",
+     "source_url": "https://opengameart.org/content/tiny-rpg-forest",
+     "zip_url": "https://opengameart.org/sites/default/files/tiny-rpg-forest-files.zip",
+     "zip_bytes": 5788353,
+     "extracted_bytes": 9177008,
+     "sha256_zip": "20820baf4fcc4172d0bb68507010a91abe3087b78ecceb8c3382903ff76409e6",
+     "license": "CC0",
+     "license_file": "LICENSES/ansimuz_tiny-rpg-forest_LICENSE.txt",
+     "license_note": "Public domain per public-license.txt dalam zip (disalin ke LICENSES/); bukti page.html di Sources/tiny-rpg-forest/. Kreator: ansimuz (Luis Zuno). Subset 4 PNG top-down saja; PSD/Demo/MACOSX/sound demo DITOLAK-inklusi (bukan kebutuhan; sound demo butuh kredit terpisah). Kenney platformer-art-pixel DITOLAK-tanpa-unduh (tag platformer = side-view, tak cocok top-down).",
+     "runtime_bytes": 11869,
+     "runtime_files": [
+      "Assets/Environment/Scorched/tree_dried.png (sha256 e158d1adcdff33f0b1c336163b9e3272b04b34aca43b2efe27046ceaf5110e74)",
+      "Assets/Environment/Scorched/rock_monument.png (sha256 d1cd24704fd6c87645af2b88ed6b18ff77afd56be1cd3c08c0cf355b388a193e)",
+      "Assets/Environment/DesertDebris/trunk.png (sha256 065d9ef1f669946e132fd4e05d583d44253ae51fe30c484944d4e5030453773c)",
+      "Assets/Environment/DesertDebris/rock.png (sha256 3340c4d6284751f0eea407514b73f0e8376cfb951975fb6d836ba48aa774384c)"
+     ],
+     "used_in_bulk": [
+      "Scripts/World/EmberfallHighlands.gd _spawn_scorched_decor (2 pohon hangus + monolit)",
+      "Scripts/World/LuminaraDesert.gd _spawn_debris_decor (2 kayu mati + 2 batu gurun)"
+     ]
+    }
+   ],
+   "engine": "4.7.2.stable.termux",
+   "note": "Phase A 5 paket + E1/E2 5 paket Kenney CC0 (10 total) + F1 4 file CC0 OGA/LPC (14 total) + BULK-001 7 entri CC0 (21 total: 5 zip music-loops-0 drakzlin subset WAV, 1 fantasy-song-pack-v1 troubadour 8 MP3, 1 tiny-rpg-forest ansimuz subset 4 PNG). MP3-duplikat music-loops + PSD/Demo/sound-forest DITOLAK-inklusi (staging saja). Cadangan GameLoops.zip tak dipakai (target tercapai + buffer). Runtime BULK: 16 trek MusicLibrary (122.521.864 B dgn .import) + 4 PNG dekor (11.869 B) + katalog/UI/pack bytes. Sources/ staging tidak dihitung konten.",
+   "phase": "BULK-001"
 }

@@ -21,6 +21,11 @@ const LAVA_STRIP: String = "res://Assets/Environment/Emberfall/lava_spr_strip45.
 const LAVA_CRUST: String = "res://Assets/Environment/Emberfall/floor_is_lava.png"
 const LAVA_POOL_POS: Array[Vector2] = [Vector2(700, 430), Vector2(1400, 650)]
 const LAVA_CRUST_CELLS: Array[Vector2i] = [Vector2i(0, 0), Vector2i(1, 0), Vector2i(4, 0)]
+## BULK-001 rumpun hangus CC0 (ansimuz tiny-rpg-forest, public domain):
+## pohon mati + monolit batu sbg variasi dekor vulkanik. Tanpa collision.
+const SCORCHED_TREE: String = "res://Assets/Environment/Scorched/tree_dried.png"
+const SCORCHED_ROCK: String = "res://Assets/Environment/Scorched/rock_monument.png"
+const SCORCHED_POS: Array[Vector2] = [Vector2(350, 750), Vector2(1600, 350)]
 
 var _t: float = 0.0
 
@@ -31,6 +36,7 @@ var _t: float = 0.0
 func _ready() -> void:
 	add_to_group("region")
 	_spawn_lava_decor()
+	_spawn_scorched_decor()
 	var exit: Area2D = $ExitPortal as Area2D
 	if exit != null:
 		exit.body_entered.connect(_on_exit_body)
@@ -99,3 +105,30 @@ func _spawn_lava_decor() -> void:
 				s.position = base + Vector2(i * 48, 0)
 				s.texture = at2
 				add_child(s)
+
+
+## BULK-001 dekor hangus: 2 pohon mati (tint arang) + 1 monolit.
+## Tanpa collision/damage. Aman bila file hilang (skip diam-diam).
+func _spawn_scorched_decor() -> void:
+	if ResourceLoader.exists(SCORCHED_TREE):
+		var tree: Texture2D = load(SCORCHED_TREE) as Texture2D
+		if tree != null:
+			for i: int in SCORCHED_POS.size():
+				var s := Sprite2D.new()
+				s.name = "ScorchedTree%d" % (i + 1)
+				s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+				s.scale = Vector2(2, 2)
+				s.position = SCORCHED_POS[i]
+				s.modulate = Color(0.45, 0.38, 0.36)
+				s.texture = tree
+				add_child(s)
+	if ResourceLoader.exists(SCORCHED_ROCK):
+		var rock: Texture2D = load(SCORCHED_ROCK) as Texture2D
+		if rock != null:
+			var m := Sprite2D.new()
+			m.name = "ScorchedMonument"
+			m.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			m.scale = Vector2(2, 2)
+			m.position = Vector2(1150, 850)
+			m.texture = rock
+			add_child(m)

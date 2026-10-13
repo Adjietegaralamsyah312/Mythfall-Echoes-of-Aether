@@ -34,8 +34,8 @@ Hanya capaian terverifikasi di file + `git log`. Rencana tidak dicatat sebagai s
 
 ## Belum selesai (jujur)
 
-- 5 region ekspansi, musik ambient, perbandingan equipment, rilis GitHub Release, uji perangkat fisik, keputusan lisensi kode (lihat `LICENSE`).
-- Tahap 100 MB: butuh aset CC0 terverifikasi + integrasi nyata per paket (lihat `CONTENT_PACKS.md` §5). Dilarang dummy/padding/duplikasi (Prioritas D).
+- 5 region ekspansi, perbandingan equipment, rilis GitHub Release, uji perangkat fisik, keputusan lisensi kode (lihat `LICENSE`).
+- Tahap 100 MB: TERCAPAI via BULK-001 (127.584.207 B union, dedup SHA-256; lihat `CONTENT_PACKS.md` §10). Dilarang dummy/padding/duplikasi (Prioritas D).
 
 ## Uncommitted E2+E3 (2026-10-13, JANGAN baca sebagai commit)
 
@@ -46,3 +46,7 @@ Hanya capaian terverifikasi di file + `git log`. Rencana tidak dicatat sebagai s
 
 - F2 (belum commit): Luminara Desert playable lokal (`LuminaraDesert.tscn` 9.235 B, `LuminaraDesert.gd` 1.134 B, `luminara_desert.tres`, portal Valley 1350,150 dua arah, 4 encounter, chest 2 shard+1 helm, checkpoint autosave) + lava strip 17.212/floor 6.706 (dekor tanpa damage) + ambient 1.626.352 (Emberfall/crypt; desert tanpa musik) + sand 3.049; `Tests/F2_LuminaraTest.gd`.
 - F3 (belum commit): `luminara.tres` v0.1.0 (1.667.496 B, 6 contents, tetap UNAVAILABLE-unduh pola E3) + `initial.tres` 5.042.552 B union; `ASSET_MANIFEST.json` 14 paket (4 baru F1, OGA tanpa file lisensi → URL+CC0); `Tests/F3_PackTest.gd`; docs Luminara playable; `Tools/count_content.py` tanpa ubah (luminara sudah di daftar pack).
+
+## Uncommitted BULK-001 (2026-10-13, JANGAN baca sebagai commit)
+
+- BULK-001 (belum commit): 16 trek CC0 `MusicLibrary` (8 WAV drakzlin subset + 8 MP3 troubadour) + `MusicCatalog.gd` + perluasan `AudioManager` (play_music anti-overlap) + panel Musik `GameUI` + BGM menu + auto-BGM valley/luminara + 4 PNG dekor Scorched/DesertDebris + `Tests/BULK001_MusicTest.gd`; `ASSET_MANIFEST.json` 21 item; `initial.tres` 127.584.207 B union (LEBIH 100 MB 27.584.233 B, dedup SHA-256); `Tools/count_content.py` upgrade SHA-256-dedup; docs + credits + SOURCING_LOG §11-15; semua 9 suite hijau; `--import` exit 0; APK 0 lokal (jujur, tanpa export).

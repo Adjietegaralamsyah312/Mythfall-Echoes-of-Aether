@@ -1,8 +1,8 @@
 class_name AudioManager
 extends Node
 ## B5 bus Master/Music/SFX + SFX dari file .ogg NYATA Kenney RPG Audio.
-## Musik: Preview.ogg BUKAN ambient loop (demo mashup) -> TANPA musik +
-## catat kebutuhan (lihat AUDIO_MAP). Semua play aman bila file hilang.
+## Musik: 16 trek CC0 di MusicLibrary (katalog MusicCatalog, play via
+## play_music anti-overlap). Preview.ogg demo TAK dipakai.
 ## ponytail: pool 8 AudioStreamPlayer; upgrade path AudioStreamPlaylist
 ## bila butuh musik adaptif.
 ## Mapping jujur (file nyata di Assets/Audio/RPG/Audio/):
@@ -16,8 +16,8 @@ const SFX_BASE: String = "res://Assets/Audio/RPG/Audio/"
 const IMPACT_BASE: String = "res://Assets/Audio/Impacts/"
 ## F2 ambient CC0 (JaggedStone, OGA): loopable dungeon/cave ambient 94.3 dtk
 ## (wind + water drips) -> cocok Emberfall vulkanik + crypt. Tanpa tag LOOP
-## embedded -> loop via flag AudioStreamOggVorbis di bawah. Desert TERBUKA
-## (ambient gua tak cocok gurun terbuka; Luminara tanpa musik + catat).
+## embedded -> loop via flag AudioStreamOggVorbis di bawah.
+## BULK-001: Luminara + valley + menu pakai BGM MusicCatalog (bukan ambient).
 const AMBIENT_BASE: String = "res://Assets/Audio/Ambience/"
 const AMBIENT_MAP: Dictionary = {
 	"ambient_ember": "dungeon_ambient_1.ogg",
@@ -41,8 +41,7 @@ const AUDIO_MAP: Dictionary = {
 	"chest": "dropLeather.ogg",
 	"levelup": "handleCoins2.ogg",
 }
-# NOTE: musik ambient nyata BELUM tersedia; Preview.ogg hanya demo.
-# Kebutuhan: loop ambient desa/hutan/dungeon (CC0) -> Docs.
+# NOTE: BGM nyata via MusicCatalog (16 trek CC0) + play_music; Preview.ogg demo tak dipakai.
 
 var master_vol: float = 1.0
 var music_vol: float = 0.8
@@ -52,6 +51,10 @@ var _streams: Dictionary = {}
 var _pool: Array[AudioStreamPlayer] = []
 var _idx: int = 0
 var _ambient: AudioStreamPlayer = null
+## BULK-001 musik BGM (lazy-load via MusicCatalog, 1 player bus Music).
+## Anti-overlap: play_music hentikan ambient; play_ambient hentikan musik.
+var _music: AudioStreamPlayer = null
+var _music_id: String = ""
 
 
 func _ready() -> void:
@@ -83,6 +86,9 @@ func _ready() -> void:
 	_ambient = AudioStreamPlayer.new()
 	_ambient.bus = "Music"
 	add_child(_ambient)
+	_music = AudioStreamPlayer.new()
+	_music.bus = "Music"
+	add_child(_music)
 	apply_volumes(master_vol, music_vol, sfx_vol)
 
 
@@ -107,7 +113,9 @@ func play(name: String) -> void:
 
 
 ## Ambient loop di bus Music (volume via apply_volumes). Aman bila hilang.
+## Hentikan musik dulu (anti-overlap satu sumber Music).
 func play_ambient(name: String) -> void:
+	stop_music()
 	if _ambient == null:
 		return
 	var s: AudioStream = _streams.get(name) as AudioStream
@@ -117,6 +125,46 @@ func play_ambient(name: String) -> void:
 		return
 	_ambient.stream = s
 	_ambient.play()
+
+
+## BULK-001 BGM dari MusicCatalog (lazy-load, loop). Aman bila hilang.
+## Hentikan ambient dulu (anti-overlap). Sama = no-op.
+func play_music(track_id: String) -> void:
+	if _music == null or track_id.is_empty():
+		return
+	if _music_id == track_id and _music.playing:
+		return
+	stop_ambient()
+	var path: String = MusicCatalog.file_for(track_id)
+	if path.is_empty() or not ResourceLoader.exists(path):
+		return
+	var raw: AudioStream = load(path) as AudioStream
+	if raw == null:
+		return
+	var s: AudioStream = raw.duplicate() as AudioStream
+	if s is AudioStreamWAV:
+		(s as AudioStreamWAV).loop_mode = AudioStreamWAV.LOOP_FORWARD
+	elif s is AudioStreamMP3:
+		(s as AudioStreamMP3).loop = true
+	elif s is AudioStreamOggVorbis:
+		(s as AudioStreamOggVorbis).loop = true
+	_music.stream = s
+	_music_id = track_id
+	_music.play()
+
+
+func stop_music() -> void:
+	_music_id = ""
+	if _music != null and _music.playing:
+		_music.stop()
+
+
+func is_music_playing() -> bool:
+	return _music != null and _music.playing
+
+
+func current_music_id() -> String:
+	return _music_id
 
 
 func stop_ambient() -> void:

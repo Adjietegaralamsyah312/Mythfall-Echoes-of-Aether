@@ -19,7 +19,7 @@ CLI (Termux `godot --headless`) SUDAH hijau: B2/B3/B4/B5 + soak Main
 - New Game → masuk valley di spawn (640,1150).
 - Continue DISABLE + status jujur bila belum ada save.
 - Settings: ubah Master/Musik/SFX → tersimpan; Quality Low matikan partikel.
-- Credits: daftar CC0 Kenney + catatan musik BELUM ada (jujur).
+- Credits: daftar CC0 Kenney/OGA + musik CC0 BULK-001 (jujur).
 - Quit menutup aplikasi.
 
 ## 3. Sentuh (TouchControls jangan rusak)

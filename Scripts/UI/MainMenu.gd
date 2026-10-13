@@ -13,6 +13,7 @@ var _settings_panel: PanelContainer
 var _credits_panel: PanelContainer
 var _sliders: Dictionary = {}
 var _quality: OptionButton
+var _audio: AudioManager
 
 
 func _ready() -> void:
@@ -32,6 +33,12 @@ func _ready() -> void:
 	_build_settings()
 	_build_credits()
 	_refresh_continue()
+	# ponytail: BGM menu CC0 via AudioManager yg sama; berhenti saat ganti scene.
+	_audio = AudioManager.new()
+	add_child(_audio)
+	var s: Dictionary = _sm.load_settings()
+	_audio.apply_volumes(float(s.get("master", 1.0)), float(s.get("music", 0.8)), float(s.get("sfx", 1.0)))
+	_audio.play_music(MusicCatalog.auto_bgm("menu"))
 
 
 func _refresh_continue() -> void:
@@ -181,7 +188,7 @@ func _build_credits() -> void:
 	body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	body.custom_minimum_size = Vector2(660, 340)
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body.text = "Mythfall: Echoes of Aether — vertical slice Dawnroot Valley.\n\nAset CC0 oleh Kenney (kenney.nl): Roguelike RPG Pack, Tiny Town, Roguelike Characters, Fantasy UI Borders, RPG Audio.\nLihat ASSET_CREDITS.md + LICENSES/ untuk lisensi.\n\nMusik ambient: BELUM tersedia (Preview.ogg hanya demo, tak dipakai).\nSFX jatuh: drawKnife/knifeSlice/cloth/chop/handleCoins/book/door/metalClick.\n\nGameplay lanjutan (Emberfall dkk): roadmap, bukan klaim selesai."
+	body.text = "Mythfall: Echoes of Aether — vertical slice Dawnroot Valley.\n\nAset CC0 oleh Kenney (kenney.nl): Roguelike RPG Pack, Tiny Town, Roguelike Characters, Fantasy UI Borders, RPG Audio.\nMusik CC0: drakzlin (music-loops-0) + troubadour (fantasy-song-pack-volume-1, OGA). Katalog di dalam game (tombol Musik).\nLihat ASSET_CREDITS.md + LICENSES/ untuk lisensi.\n\nAmbient gua: dungeon_ambient_1 (JaggedStone, CC0) di Emberfall/crypt.\nSFX jatuh: drawKnife/knifeSlice/cloth/chop/handleCoins/book/door/metalClick.\n\nGameplay lanjutan (Emberfall dkk): roadmap, bukan klaim selesai."
 	vb.add_child(body)
 	var back := Button.new()
 	back.text = "Kembali"

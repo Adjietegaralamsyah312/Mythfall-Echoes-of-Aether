@@ -56,6 +56,10 @@ var _minimap: Minimap
 var _map_toggle: Button
 var _toolbar_q: Button
 var _toolbar_p: Button
+var _toolbar_m: Button
+var _music_panel: PanelContainer
+var _music_now: Label
+var _music_list: VBoxContainer
 var _questlog: PanelContainer
 var _quest_list: Label
 var _dialog: PanelContainer
@@ -105,6 +109,7 @@ func build_all() -> void:
 	_build_dialog()
 	_build_pause()
 	_build_settings()
+	_build_music()
 	_build_error()
 	apply_settings(settings)
 
@@ -193,6 +198,10 @@ func _build_toolbar() -> void:
 	_toolbar_p.position = Vector2(612, 16)
 	_toolbar_p.pressed.connect(toggle_pause)
 	_root.add_child(_toolbar_p)
+	_toolbar_m = _mkbtn("Musik")
+	_toolbar_m.position = Vector2(724, 16)
+	_toolbar_m.pressed.connect(toggle_music)
+	_root.add_child(_toolbar_m)
 
 
 func _panel_center(w: float, h: float) -> PanelContainer:
@@ -329,6 +338,73 @@ func _mk_slider(vb: VBoxContainer, label: String, val: float) -> HSlider:
 	s.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(s)
 	return s
+
+
+func _build_music() -> void:
+	_music_panel = _panel_center(560, 560)
+	var vb := VBoxContainer.new()
+	_music_panel.add_child(vb)
+	var t := Label.new()
+	t.text = "Soundtrack (CC0)"
+	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vb.add_child(t)
+	_music_now = Label.new()
+	_music_now.text = "Tidak ada musik."
+	_music_now.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	vb.add_child(_music_now)
+	var sc := ScrollContainer.new()
+	sc.custom_minimum_size = Vector2(520, 340)
+	sc.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	vb.add_child(sc)
+	_music_list = VBoxContainer.new()
+	_music_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	sc.add_child(_music_list)
+	for tr: Dictionary in MusicCatalog.TRACKS:
+		var b := Button.new()
+		b.text = "%s [%s]" % [str(tr.get("title", "")), str(tr.get("category", ""))]
+		b.custom_minimum_size = Vector2(460, 64)
+		b.focus_mode = Control.FOCUS_ALL
+		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		var tid: String = str(tr.get("id", ""))
+		b.pressed.connect(_on_music_pick.bind(tid))
+		_music_list.add_child(b)
+	var row := HBoxContainer.new()
+	vb.add_child(row)
+	var stop := _mkbtn("Stop")
+	stop.pressed.connect(_on_music_stop)
+	row.add_child(stop)
+	var c: Button = _mkbtn("Tutup")
+	c.pressed.connect(toggle_music)
+	row.add_child(c)
+
+
+func toggle_music() -> void:
+	_click()
+	_music_panel.visible = not _music_panel.visible
+	if _music_panel.visible:
+		_refresh_music_now()
+
+
+func _refresh_music_now() -> void:
+	if audio != null and audio.is_music_playing():
+		var t: Dictionary = MusicCatalog.get_track(audio.current_music_id())
+		_music_now.text = "Main: %s (%s, CC0 %s)" % [str(t.get("title", "?")), str(t.get("category", "")), str(t.get("creator", ""))]
+	elif audio != null and audio.is_ambient_playing():
+		_music_now.text = "Main: Ambient gua (Emberfall/crypt)."
+	else:
+		_music_now.text = "Tidak ada musik."
+
+
+func _on_music_pick(track_id: String) -> void:
+	if audio != null:
+		audio.play_music(track_id)
+	_refresh_music_now()
+
+
+func _on_music_stop() -> void:
+	if audio != null:
+		audio.stop_music()
+	_refresh_music_now()
 
 
 func _build_error() -> void:

@@ -198,12 +198,17 @@ func _after_load_region(region_id: String, node: Node2D) -> void:
 	_apply_camera_limits(def)
 	_connect_region_signals(node)
 	_restore_chests(region_id, node)
-	# ponytail: ambient gua (Emberfall/crypt); valley/desert tanpa musik.
+	# ponytail: BGM katalog (valley/luminara) vs ambient gua (Emberfall/crypt);
+	# valley/desert lain tanpa musik. Anti-overlap di AudioManager.
 	if audio != null:
-		if region_id == EMBERFALL_ID or region_id == CRYPT_ID:
+		var bgm: String = MusicCatalog.auto_bgm(region_id)
+		if not bgm.is_empty():
+			audio.play_music(bgm)
+		elif region_id == EMBERFALL_ID or region_id == CRYPT_ID:
 			audio.play_ambient("ambient_ember")
 		else:
 			audio.stop_ambient()
+			audio.stop_music()
 	var spawned: int = _spawn_region_encounters(node)
 	if spawned <= 0:
 		_spawn_test_enemies()

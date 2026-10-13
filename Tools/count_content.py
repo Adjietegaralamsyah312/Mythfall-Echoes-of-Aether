@@ -1,6 +1,34 @@
 #!/usr/bin/env python3
-"""E3 hitung konten nyata (tanpa dep). ponytail: walk + inode-set; upgrade path du -sb bila perlu."""
+"""BULK-001 hitung konten nyata (tanpa dep). Dedup SHA-256 isi file
+(format/salinan sama = sekali) + cache inode; pack audio (MusicLibrary)
+terhitung via res://Assets. ponytail: sha256 stdlib; upgrade path du -sb."""
+import hashlib
 import json, os, re, sys
+
+_SHA_CACHE = {}
+DEDUP_SKIPPED = 0
+
+def _fkey(fp):
+    """Kunci dedup = sha256 isi (cache per inode+size+mtime)."""
+    global DEDUP_SKIPPED
+    try:
+        st = os.stat(fp)
+    except OSError:
+        return None
+    ck = (st.st_ino, st.st_size, st.st_mtime_ns)
+    hit = _SHA_CACHE.get(ck)
+    if hit is not None:
+        return hit
+    h = hashlib.sha256()
+    try:
+        with open(fp, "rb") as f:
+            for chunk in iter(lambda: f.read(1 << 20), b""):
+                h.update(chunk)
+    except OSError:
+        return None
+    key = "sha256:" + h.hexdigest()
+    _SHA_CACHE[ck] = key
+    return key
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) if os.path.dirname(os.path.abspath(__file__)).endswith("Tools") else os.getcwd()
 if os.path.basename(ROOT) == "Tools":
@@ -26,6 +54,7 @@ def parse_field(tres, field):
     return int(v) if re.match(r"-?\d+$", v) else v.strip('"')
 
 def walk_bytes(paths, seen):
+    global DEDUP_SKIPPED
     total = 0
     for p in paths:
         d = res_to_disk(p)
@@ -34,21 +63,32 @@ def walk_bytes(paths, seen):
         if os.path.isfile(d):
             for extra in [d, d + ".import", d + ".uid"]:
                 if os.path.isfile(extra):
-                    st = os.stat(extra)
-                    if st.st_ino not in seen:
-                        seen.add(st.st_ino)
-                        total += st.st_size
+                    key = _fkey(extra)
+                    if key is None:
+                        continue
+                    if key not in seen:
+                        seen.add(key)
+                        total += os.path.getsize(extra)
+                    else:
+                        DEDUP_SKIPPED += os.path.getsize(extra)
         else:
             for dp, _, fns in os.walk(d):
                 for fn in fns:
                     fp = os.path.join(dp, fn)
-                    try:
-                        st = os.stat(fp)
-                    except OSError:
+                    key = _fkey(fp)
+                    if key is None:
                         continue
-                    if st.st_ino not in seen:
-                        seen.add(st.st_ino)
-                        total += st.st_size
+                    if key not in seen:
+                        seen.add(key)
+                        try:
+                            total += os.path.getsize(fp)
+                        except OSError:
+                            pass
+                    else:
+                        try:
+                            DEDUP_SKIPPED += os.path.getsize(fp)
+                        except OSError:
+                            pass
     return total
 
 def dir_bytes(path):
@@ -58,13 +98,15 @@ def dir_bytes(path):
     for dp, _, fns in os.walk(path):
         for fn in fns:
             fp = os.path.join(dp, fn)
-            try:
-                st = os.stat(fp)
-            except OSError:
+            key = _fkey(fp)
+            if key is None:
                 continue
-            if st.st_ino not in seen:
-                seen.add(st.st_ino)
-                t += st.st_size
+            if key not in seen:
+                seen.add(key)
+                try:
+                    t += os.path.getsize(fp)
+                except OSError:
+                    pass
     return t
 
 def main():
@@ -111,6 +153,7 @@ def main():
         print("manifest_baca_gagal %s" % e)
     print("TARGET %d" % TARGET)
     print("TOTAL_KONTEN %d" % unionbytes)
+    print("DEDUP_SHA256_SKIPPED %d (byte duplikat isi, tidak dihitung)" % DEDUP_SKIPPED)
     print("SELISIH %d (kurang)" % (TARGET - unionbytes) if unionbytes < TARGET else "LEBIH %d" % (unionbytes - TARGET))
 
 if __name__ == "__main__":

@@ -59,7 +59,7 @@ Sumber + lisensi: `ASSET_CREDITS.md` + `LICENSES/` (5 paket CC0 Kenney). Detail 
 - Single-sprite + `flip_h` (`Player.gd`: `flip_h = facing.x < -0.1`; `NPC.gd` `face()`). Tanpa `AnimatedSprite2D`/frame jalan — sesuai larangan plan: jangan gabung part acak jadi animasi palsu.
 - Combat: flash merah, knockback, fade mati, `GPUParticles2D` pooled (6 hit + 4 die, `amount` 8 Balanced / 14 High / 0 Low via `VFX.set_quality`), damage number `Tween` 0.6 dtk.
 - Chest: ganti warna base/lid saat dibuka (bukan animasi frame). `LootPickup`: warna permata per tipe + `bob` kode.
-- SFX nyata dari file `.ogg` Kenney (`Scripts/UI/AudioManager.gd` `AUDIO_MAP`: swing `drawKnife1`, hit `knifeSlice`, pickup `handleCoins`, dsb). Musik ambient **belum ada** — `Preview.ogg` hanya demo, bukan loop (lihat GDD).
+- SFX nyata dari file `.ogg` Kenney (`Scripts/UI/AudioManager.gd` `AUDIO_MAP`: swing `drawKnife1`, hit `knifeSlice`, pickup `handleCoins`, dsb). Musik CC0 BULK-001: 16 trek `MusicLibrary` (drakzlin + troubadour) via `MusicCatalog` + `play_music` (auto-BGM menu/valley/luminara, ambient Emberfall/crypt dipertahankan); `Preview.ogg` demo tak dipakai.
 
 ## 7. Konsistensi
 
