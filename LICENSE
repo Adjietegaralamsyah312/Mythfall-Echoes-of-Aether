@@ -1,0 +1,37 @@
+STATUS LISENSI — Mythfall: Echoes of Aether
+
+UNLICENSED — all rights reserved, pending owner decision.
+
+1. Kode (GDScript, scene, resource, dokumen di repo ini):
+   BELUM ada lisensi diputuskan. Pernyataan ini mengikuti
+   `README.md` ("Keputusan lisensi kode & aset BELUM ditetapkan —
+   jangan distribusikan build sebelum ada keputusan") dan
+   ketiadaan file lisensi kode sebelum sesi DOC-001.
+   Hak cipta dipegang pemegang repository — menunggu konfirmasi
+   pemilik (nama tidak dikarang di sini). Jangan anggap MIT atau
+   permisif lain tanpa dasar. Jangan distribusikan build/APK
+   sebelum pemilik menetapkan lisensi.
+
+2. Aset pihak ketiga:
+   5 paket Kenney Vleugels (www.kenney.nl), lisensi Creative
+   Commons Zero (CC0) — terverifikasi di halaman resmi tiap paket.
+   Rincian paket + pemakaian: `ASSET_CREDITS.md`. Ukuran + sha256:
+   `ASSET_MANIFEST.json`. Teks lisensi asli: `LICENSES/`
+   (roguelike-rpg-pack, tiny-town, roguelike-characters,
+   fantasy-ui-borders, rpg-audio).
+
+3. Musik:
+   Belum ada loop ambient nyata. `Preview.ogg` (bila ada di paket
+   audio) hanya demo, bukan lisensi musik final. Kebutuhan loop
+   CC0 desa/hutan/dungeon masih terbuka (lihat
+   `docs/GAME_DESIGN_DOCUMENT.md` dan `docs/ART_DIRECTION.md`).
+
+4. Keputusan butuh pemilik:
+   - Pilih lisensi kode (mis. proprietary tertutup vs terbuka) dan
+     tulis pemegang hak cipta resmi.
+   - Konfirmasi apakah dokumen boleh ikut lisensi yang sama.
+   - Konfirmasi aturan distribusi APK/paket konten sebelum rilis.
+
+Dokumen ini status eksplisit, bukan teks lisensi. Setelah pemilik
+memutuskan, ganti file ini dengan teks lisensi resmi + nama
+pemegang + tahun.
