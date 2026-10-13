@@ -6,12 +6,14 @@ Sistem manifest paket konten. Unduh/instal/verifikasi = D2 (belum ada).
 
 | pack_id | Isi | Status | Ukuran aktual |
 |---|---|---|---|
-| `initial` | Menu, gameplay awal, Dawnroot Valley + Crypt, UI, efek, audio awal | BUILT_IN | 3.026.492 B terpasang (`du`, 2026-10-13) |
-| `emberfall` | Rencana: Emberfall Highlands | UNAVAILABLE | -1 (belum ada) |
+| `initial` | Menu, gameplay awal, Dawnroot Valley + Crypt, UI, efek, audio awal (+ file E2, subset Emberfall di dalam) | BUILT_IN | 3.369.507 B terpasang (`du`, 2026-10-13) |
+| `emberfall` | Emberfall Highlands playable lokal (portal dua arah, 5 encounter, chest, checkpoint) — BELUM bisa diunduh | UNAVAILABLE* | 318.047 B terpasang lokal; unduhan -1/URL kosong |
 | `luminara` | Rencana: Luminara Desert | UNAVAILABLE | -1 (belum ada) |
 | `veilwood` | Rencana: Veilwood Forest | UNAVAILABLE | -1 (belum ada) |
 | `azure` | Rencana: Azure Shattercoast | UNAVAILABLE | -1 (belum ada) |
 | `aether_crown` | Rencana: Aether Crown (endgame) | UNAVAILABLE | -1 (belum ada) |
+
+\*Status jujur E3: `emberfall` tetap UNAVAILABLE untuk unduh (tanpa hosting: `download_url ""`, `file_bytes -1`, `sha256 ""` — jangan karang URL), tapi konten lokal terpasang + playable offline (lihat §8). `is_available("emberfall")==false` dipertahankan agar D2/panel tetap tolak unduh jujur.
 
 Manifest: `Data/Packs/*.tres`. Skema: `Scripts/ContentPacks/PackDef.gd`.
 Registry baca-manifest: `Scripts/ContentPacks/PackRegistry.gd`
@@ -24,19 +26,20 @@ sinyal `pack_list_changed`).
 `luminara_desert`, `veilwood_forest`, `azure_shattercoast`, `aether_crown`
 (rencana; merujuk nama plan.md Prioritas A).
 
-## 3. Ukuran aktual vs target (jujur, 2026-10-13)
+## 3. Ukuran aktual vs target (jujur, 2026-10-13, E3)
 
 | Metrik | Byte aktual | Catatan |
 |---|---|---|
-| Aset Kenney (5 zip) | 2.284.476 | `ASSET_MANIFEST.json` |
-| Aset terekstrak (zip) | 2.427.779 | idem |
-| `Assets/` di disk | 2.875.305 | termasuk `.import` editor (+447.526) |
-| Initial Pack terpasang | 3.026.492 | `du -sb Assets+Scenes+Scripts+Data+LICENSES` |
-| Source proyek (tanpa `.git`/`.godot`) | ~3,07 MB | `.git` (~2,7 MB) + `.godot` (~2,6 MB) BUKAN konten |
+| Aset Kenney zip (10 paket) | 6.026.122 | `ASSET_MANIFEST.json` (5 lama 2.284.476 + 5 baru 3.741.646) |
+| Emberfall subset runtime | 318.047 | Caves 32.172 + Urban 18.270 + Foliage 171.275 + RPGExpansion 12.666 + Impacts 70.378 + scene/script/data 13.286 (`du`) |
+| Initial Pack terpasang (union) | 3.369.507 | `du -scb Assets+Scenes+Scripts+Data+LICENSES`; sudah termasuk subset Emberfall (tanpa double-count) |
+| Total konten nyata siap main | 3.369.507 | = Initial union (`python3 Tools/count_content.py`) |
+| Ekspansi siap (Emberfall) | 318.047 | subset di atas; 4 paket lain 0 B |
+| `Sources/` staging | 13.188.610 | arsip + extracted E1 — BUKAN konten, jangan hitung |
+| Source proyek (tanpa `.git`/`.godot`) | ~3,4 MB | `.git` 2.789.334 + `.godot` 8.023.199 BUKAN konten |
 | APK lokal | 0 (belum ada) | `Build/` kosong; klaim 29 MB sebelumnya TIDAK terbukti di disk |
-| Total konten nyata siap main | 3.026.492 | = Initial Pack |
-| Target distribusi awal | 100.000.000 | **kurang 96.973.508 B (~97 MB)** |
-| Target jangka panjang | 2–3 GB lintas paket | 5 paket ekspansi masih -1 (0 B nyata) |
+| Target distribusi awal | 100.000.000 | **kurang 96.630.493 B (~96,6 MB)** |
+| Target jangka panjang | 2–3 GB lintas paket | 4 paket ekspansi masih -1 (0 B nyata) |
 
 Toleransi: angka manifest bisa meleset ±16 KB karena file `.import`
 hasil editor dan manifest itu sendiri — bukan dummy, jelaskan bila ditanya.
@@ -87,3 +90,12 @@ yang tak ada di Android — dan tak di-commit).
 
 Batas jujur: belum ada server/URL/hash paket nyata — 5 paket ekspansi tetap
 UNAVAILABLE sampai ada aset CC0 terverifikasi + manifest nyata (lihat §5).
+
+## 8. Emberfall E3 — playable lokal, belum hosting (2026-10-13)
+
+- Scene: `Scenes/World/EmberfallHighlands.tscn` (1920×1080, basalt Caves + pos Urban + foliage hangus + lava Polygon2D pulse + pilar/reruntuhan + outpost + checkpoint + ExitPortal + Bounds) + `Scenes/Enemies/EmberWisp.tscn` (`ember_wisp` HP45 dmg11 ranged).
+- Region: `Data/Regions/emberfall_highlands.tres` (`spawn/checkpoint 960,900`); portal dua arah: Valley `EmberPortal (1000,150)` → Emberfall checkpoint; Emberfall `ExitPortal (960,1000)` → Valley.
+- Audio: `AudioManager.IMPACT_MAP` (footstep_ember/hit_metal/mine/punch) + footstep loop di `Main._process` khusus Emberfall.
+- Manifest: `Data/Packs/emberfall.tres` v0.1.0, `installed_bytes 318047`, `contents` 10 path runtime E2, `license_note` CC0; `download_url ""`, `file_bytes -1`, `sha256 ""`, status tetap UNAVAILABLE (unduh ditolak jujur; main offline tetap jalan).
+- Hitung: `python3 Tools/count_content.py` → union 3.369.507 B, selisih 96.630.493 B ke 100 MB. `Sources/` 13.188.610 B staging tidak dihitung.
+- Hosting tersisa: zip per-pack + URL + sha256 server + upload (tanpa karang URL); lalu status AVAILABLE + `file_bytes` nyata. 4 region lain tetap RENCANA (0 B).

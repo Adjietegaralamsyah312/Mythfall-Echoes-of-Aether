@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/EnemyStats.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+enemy_id = "ember_wisp"
+display_name = "Ember Wisp"
+max_hp = 45.0
+damage = 11.0
+speed = 140.0
+aggro_radius = 300.0
+attack_range = 220.0
+attack_cooldown = 1.6
+attack_windup = 0.5
+xp_reward = 38
+is_ranged = true
+projectile_speed = 280.0
+keeps_distance = true
+loot_table = Array[Dictionary]([{"item_id": "aether_shard", "chance": 0.6}, {"item_id": "health_potion", "chance": 0.25}])

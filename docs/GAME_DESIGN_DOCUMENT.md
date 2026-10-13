@@ -39,6 +39,7 @@ Sentuh (`Scenes/UI/TouchControls.tscn`, `TouchControls.gd`): joystick kiri (radi
 | `skeleton` | Skeleton | 55 | 11 | 75 | 220 | 28 | 1.1 / 0.55 | 25 | potion 0.25, sword 0.12, shard 0.2 |
 | `wisp` | Aether Wisp | 35 | 8 | 130 | 280 | 220 | 1.6 / 0.5 | 30 | ranged, `keeps_distance`, proj 260; shard 0.5, potion 0.2 |
 | `elite_dawnroot` | Elite Dawnroot Guardian | 110 | 22 | 80 | 260 | 30 | 1.0 / 0.55 | 80 | sword 0.5, helm 0.35, shard 0.8, potion 0.5 |
+| `ember_wisp` | Ember Wisp | 45 | 11 | 140 | 300 | 220 | 1.6 / 0.5 | 38 | ranged, `keeps_distance`, proj 280; shard 0.6, potion 0.25 |
 
 Scene: `Scenes/Enemies/Slime|Skeleton|Wisp|EliteDawnroot.tscn`. Perilaku: `EnemyBase.gd` + `Slime/Skeleton/Wisp.gd`.
 
@@ -48,9 +49,9 @@ Scene: `Scenes/Enemies/Slime|Skeleton|Wisp|EliteDawnroot.tscn`. Perilaku: `Enemy
 - `GameUI.gd` (dibangun via kode): HUD HP/Stamina/Lv + tracker 1 quest + tombol minimize, Quest Log (Tersedia/Aktif/Selesai + kosong jujur), DialoguePanel (nama + Lanjut/Tutup, sentuh + keyboard), pause, settings, minimap kode (`draw_circle`/`draw_arc`).
 - `ContentPacksPanel`: 6 paket + ukuran butuh/terpasang + Unduh disable beralasan + progress + Kembali. Lihat `CONTENT_PACKS.md`.
 
-## 8. Region — [TERAPKAN 2 / PLANNED 5]
+## 8. Region — [TERAPKAN 3 / PLANNED 4]
 
-Playable: `dawnroot_valley` (2560×1440) + `dawnroot_crypt` (1280×720, `dungeon_id dawnroot_crypt`). **[PLANNED]** `emberfall_highlands`, `luminara_desert`, `veilwood_forest`, `azure_shattercoast`, `aether_crown` — hanya `region_ids` di `Data/Packs/*.tres`, status UNAVAILABLE `-1`, tanpa scene. Jangan klaim playable. Penuh: `WORLD_MAP.md`.
+Playable: `dawnroot_valley` (2560×1440) + `dawnroot_crypt` (1280×720, `dungeon_id dawnroot_crypt`) + `emberfall_highlands` (1920×1080, playable lokal E2; portal dua arah Valley↔Emberfall; quest Emberfall masih **[PLANNED]**). **[PLANNED]** `luminara_desert`, `veilwood_forest`, `azure_shattercoast`, `aether_crown` — hanya `region_ids` di `Data/Packs/*.tres`, status UNAVAILABLE `-1`, tanpa scene. Penuh: `WORLD_MAP.md`.
 
 ## 9. Save — [TERAPKAN]
 

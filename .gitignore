@@ -17,3 +17,6 @@ Thumbs.db
 
 # Catatan: JANGAN ignore *.import — file .import dipertahankan agar
 # impor aset konsisten antar mesin.
+
+# E1-001: direktori staging unduhan aset (bukan runtime, jangan commit)
+Sources/

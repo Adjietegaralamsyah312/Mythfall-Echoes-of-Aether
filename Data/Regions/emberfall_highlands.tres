@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RegionDef" format=3]
+
+[ext_resource type="Script" path="res://Scripts/World/RegionDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+region_id = "emberfall_highlands"
+display_name = "Emberfall Highlands"
+scene_path = "res://Scenes/World/EmberfallHighlands.tscn"
+spawn_pos = Vector2(960, 900)
+checkpoint_pos = Vector2(960, 900)
+dungeon_ref = ""
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_bottom = 1080

@@ -389,6 +389,26 @@ offset_bottom = 58.0
 text = "DAWNROOT CRYPT"
 horizontal_alignment = 1
 
+[node name="EmberPortal" type="Area2D" parent="."]
+position = Vector2(1000, 150)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EmberPortal"]
+shape = SubResource("EnterRect")
+
+[node name="Arch" type="Polygon2D" parent="EmberPortal"]
+polygon = PackedVector2Array(-40, 30, -40, -10, -20, -30, 20, -30, 40, -10, 40, 30, 24, 30, 24, -6, 12, -16, -12, -16, -24, -6, -24, 30)
+color = Color(0.5, 0.2, 0.1, 1)
+
+[node name="Label" type="Label" parent="EmberPortal"]
+offset_left = -120.0
+offset_top = 36.0
+offset_right = 120.0
+offset_bottom = 58.0
+text = "EMBERFALL HIGHLANDS"
+horizontal_alignment = 1
+
 [node name="Bounds" type="StaticBody2D" parent="."]
 collision_layer = 1
 collision_mask = 0

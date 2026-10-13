@@ -1,1 +1,154 @@
-{"assets": [{"extracted_bytes": 725661, "license": "CC0", "license_file": "LICENSES/kenney_roguelike-rpg-pack_LICENSE.txt", "path": "Assets/Environment/RoguelikeRPG", "sha256_zip": "8e7d2378f8f794245645f6d7dc7aeeb246791410a7e512293c594b46a5a9524b", "source_url": "https://kenney.nl/assets/roguelike-rpg-pack", "used_in_phase_a": ["Assets/Environment/RoguelikeRPG/Sample1.png (placeholder art, Scenes/World/Main.tscn)"], "zip_bytes": 715373, "zip_url": "https://kenney.nl/media/pages/assets/roguelike-rpg-pack/12c03cd78b-1677697420/kenney_roguelike-rpg-pack.zip"}, {"extracted_bytes": 163379, "license": "CC0", "license_file": "LICENSES/kenney_tiny-town_LICENSE.txt", "path": "Assets/Environment/TinyTown", "sha256_zip": "9768692dccff1d706408a5aedd6ca4f6cd1409506cbc84cb2f862919764be977", "source_url": "https://kenney.nl/assets/tiny-town", "used_in_phase_a": ["Assets/Environment/TinyTown/Sample.png (banner, Scenes/MainMenu/MainMenu.tscn)"], "zip_bytes": 182243, "zip_url": "https://kenney.nl/media/pages/assets/tiny-town/a415fbeb49-1735736916/kenney_tiny-town.zip"}, {"extracted_bytes": 63617, "license": "CC0", "license_file": "LICENSES/kenney_roguelike-characters_LICENSE.txt", "path": "Assets/Characters/Roguelike", "sha256_zip": "05c4c0af7326584cfffbbb196571eb9e102981d2033e90e225c5ba8da8771284", "source_url": "https://kenney.nl/assets/roguelike-characters", "used_in_phase_a": [], "zip_bytes": 63243, "zip_url": "https://kenney.nl/media/pages/assets/roguelike-characters/53ffff4133-1729196490/kenney_roguelike-characters.zip"}, {"extracted_bytes": 425905, "license": "CC0", "license_file": "LICENSES/kenney_fantasy-ui-borders_LICENSE.txt", "path": "Assets/UI/FantasyBorders", "sha256_zip": "59532da3bd61195a425585455b40baa6cbf1eda8227c42adcef31a535a737769", "source_url": "https://kenney.nl/assets/fantasy-ui-borders", "used_in_phase_a": [], "zip_bytes": 358780, "zip_url": "https://kenney.nl/media/pages/assets/fantasy-ui-borders/ab29cd0165-1701602367/kenney_fantasy-ui-borders.zip"}, {"extracted_bytes": 1049217, "license": "CC0", "license_file": "LICENSES/kenney_rpg-audio_LICENSE.txt", "path": "Assets/Audio/RPG", "sha256_zip": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b", "source_url": "https://kenney.nl/assets/rpg-audio", "used_in_phase_a": [], "zip_bytes": 964837, "zip_url": "https://kenney.nl/media/pages/assets/rpg-audio/8e99002d76-1677590336/kenney_rpg-audio.zip"}], "engine": "4.7.2.stable.termux", "note": "Hanya 2 tekstur di-wire sebagai bukti integrasi. Paket lain terarsip untuk Phase B. Tidak ada file dummy.", "phase": "A"}
+{
+ "assets": [
+  {
+   "extracted_bytes": 725661,
+   "license": "CC0",
+   "license_file": "LICENSES/kenney_roguelike-rpg-pack_LICENSE.txt",
+   "path": "Assets/Environment/RoguelikeRPG",
+   "sha256_zip": "8e7d2378f8f794245645f6d7dc7aeeb246791410a7e512293c594b46a5a9524b",
+   "source_url": "https://kenney.nl/assets/roguelike-rpg-pack",
+   "used_in_phase_a": [
+    "Assets/Environment/RoguelikeRPG/Sample1.png (placeholder art, Scenes/World/Main.tscn)"
+   ],
+   "zip_bytes": 715373,
+   "zip_url": "https://kenney.nl/media/pages/assets/roguelike-rpg-pack/12c03cd78b-1677697420/kenney_roguelike-rpg-pack.zip"
+  },
+  {
+   "extracted_bytes": 163379,
+   "license": "CC0",
+   "license_file": "LICENSES/kenney_tiny-town_LICENSE.txt",
+   "path": "Assets/Environment/TinyTown",
+   "sha256_zip": "9768692dccff1d706408a5aedd6ca4f6cd1409506cbc84cb2f862919764be977",
+   "source_url": "https://kenney.nl/assets/tiny-town",
+   "used_in_phase_a": [
+    "Assets/Environment/TinyTown/Sample.png (banner, Scenes/MainMenu/MainMenu.tscn)"
+   ],
+   "zip_bytes": 182243,
+   "zip_url": "https://kenney.nl/media/pages/assets/tiny-town/a415fbeb49-1735736916/kenney_tiny-town.zip"
+  },
+  {
+   "extracted_bytes": 63617,
+   "license": "CC0",
+   "license_file": "LICENSES/kenney_roguelike-characters_LICENSE.txt",
+   "path": "Assets/Characters/Roguelike",
+   "sha256_zip": "05c4c0af7326584cfffbbb196571eb9e102981d2033e90e225c5ba8da8771284",
+   "source_url": "https://kenney.nl/assets/roguelike-characters",
+   "used_in_phase_a": [],
+   "zip_bytes": 63243,
+   "zip_url": "https://kenney.nl/media/pages/assets/roguelike-characters/53ffff4133-1729196490/kenney_roguelike-characters.zip"
+  },
+  {
+   "extracted_bytes": 425905,
+   "license": "CC0",
+   "license_file": "LICENSES/kenney_fantasy-ui-borders_LICENSE.txt",
+   "path": "Assets/UI/FantasyBorders",
+   "sha256_zip": "59532da3bd61195a425585455b40baa6cbf1eda8227c42adcef31a535a737769",
+   "source_url": "https://kenney.nl/assets/fantasy-ui-borders",
+   "used_in_phase_a": [],
+   "zip_bytes": 358780,
+   "zip_url": "https://kenney.nl/media/pages/assets/fantasy-ui-borders/ab29cd0165-1701602367/kenney_fantasy-ui-borders.zip"
+  },
+  {
+   "extracted_bytes": 1049217,
+   "license": "CC0",
+   "license_file": "LICENSES/kenney_rpg-audio_LICENSE.txt",
+   "path": "Assets/Audio/RPG",
+   "sha256_zip": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+   "source_url": "https://kenney.nl/assets/rpg-audio",
+   "used_in_phase_a": [],
+   "zip_bytes": 964837,
+   "zip_url": "https://kenney.nl/media/pages/assets/rpg-audio/8e99002d76-1677590336/kenney_rpg-audio.zip"
+  },
+  {
+   "path": "Assets/Environment/Caves",
+   "source_url": "https://kenney.nl/assets/roguelike-caves-dungeons",
+   "zip_url": "https://kenney.nl/media/pages/assets/roguelike-caves-dungeons/5195ceb8ca-1677694831/kenney_roguelike-caves-dungeons.zip",
+   "zip_bytes": 188816,
+   "extracted_bytes": 222433,
+   "sha256_zip": "8ee0f7ce911e7bc0c425e98783058870d0a49572440ab0b89a5f44e68b74f0bf",
+   "license": "CC0",
+   "license_file": "LICENSES/kenney_roguelike-caves-dungeons_LICENSE.txt",
+   "runtime_bytes": 32172,
+   "runtime_files": [
+    "Assets/Environment/Caves/roguelikeDungeon_transparent.png (sha256 3abd8d294c523fe78078e2123146a2b9d2c0f2dd3cfbbd60dec8f508c3fe8c2c)"
+   ],
+   "used_in_e2": [
+    "Scenes/World/EmberfallHighlands.tscn (basalt floor/wall/crystal/pillar)"
+   ]
+  },
+  {
+   "path": "Assets/Environment/Urban",
+   "source_url": "https://kenney.nl/assets/rpg-urban-pack",
+   "zip_url": "https://kenney.nl/media/pages/assets/rpg-urban-pack/0a097d1dc7-1677578575/kenney_rpg-urban-pack.zip",
+   "zip_bytes": 306630,
+   "extracted_bytes": 236710,
+   "sha256_zip": "4541d89d639fc7d1e905dd925e55b1c4977a41d983516228db1d57173bb9afaf",
+   "license": "CC0",
+   "license_file": "LICENSES/kenney_rpg-urban-pack_LICENSE.txt",
+   "runtime_bytes": 18270,
+   "runtime_files": [
+    "Assets/Environment/Urban/tilemap_packed.png (sha256 305e71fa778444a0858c33988d45a6b79ea923f500f96079f4378347cf6ad389)"
+   ],
+   "used_in_e2": [
+    "Scenes/World/EmberfallHighlands.tscn (outpost floor/rubble)"
+   ]
+  },
+  {
+   "path": "Assets/Environment/Foliage",
+   "source_url": "https://kenney.nl/assets/foliage-pack",
+   "zip_url": "https://kenney.nl/media/pages/assets/foliage-pack/06a6c43298-1677693473/kenney_foliage-pack.zip",
+   "zip_bytes": 2230956,
+   "extracted_bytes": 2582808,
+   "sha256_zip": "33bd564f2cebb6a68bee9a798650d669571a389a437b0bd601d257ca2b5e7aed",
+   "license": "CC0",
+   "license_file": "LICENSES/kenney_foliage-pack_LICENSE.txt",
+   "runtime_bytes": 171275,
+   "runtime_files": [
+    "Assets/Environment/Foliage/foliagePack_default.png (sha256 3cce69a44e5fc4b82ca2400bfc249e6d9ad3224ddf1a69167045a3b8b8aa14f9)"
+   ],
+   "used_in_e2": [
+    "Scenes/World/EmberfallHighlands.tscn (scorch bush/sapling/shrub, tint hangus)"
+   ]
+  },
+  {
+   "path": "Assets/UI/RPGExpansion",
+   "source_url": "https://kenney.nl/assets/ui-pack-rpg-expansion",
+   "zip_url": "https://kenney.nl/media/pages/assets/ui-pack-rpg-expansion/7ec4a46657-1677661824/kenney_ui-pack-rpg-expansion.zip",
+   "zip_bytes": 214394,
+   "extracted_bytes": 283867,
+   "sha256_zip": "c69c30c09d74df542842e4ec811735b6d260cd6c9e2ee261d7b894d259a6adb4",
+   "license": "CC0",
+   "license_file": "LICENSES/kenney_ui-pack-rpg-expansion_LICENSE.txt",
+   "runtime_bytes": 12666,
+   "runtime_files": [
+    "9 PNG 9-slice bar/button (subset E2, lih. Sources/SOURCING_LOG.md \u00a74)"
+   ],
+   "used_in_e2": [
+    "HUD premium (pengganti StyleBoxFlat bertahap)"
+   ]
+  },
+  {
+   "path": "Assets/Audio/Impacts",
+   "source_url": "https://kenney.nl/assets/impact-sounds",
+   "zip_url": "https://kenney.nl/media/pages/assets/impact-sounds/87b4ddecda-1677589768/kenney_impact-sounds.zip",
+   "zip_bytes": 800850,
+   "extracted_bytes": 1035004,
+   "sha256_zip": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8",
+   "license": "CC0",
+   "license_file": "LICENSES/kenney_impact-sounds_LICENSE.txt",
+   "runtime_bytes": 70378,
+   "runtime_files": [
+    "footstep_concrete_000.ogg d7267e18..",
+    "impactMetal_heavy_000.ogg e0704569..",
+    "impactMining_000.ogg 36b4ea10..",
+    "impactPunch_heavy_000.ogg b33a8f14.. (penuh di Tools/count + sha256sum)"
+   ],
+   "used_in_e2": [
+    "Scripts/UI/AudioManager.gd IMPACT_MAP + Scripts/World/Main.gd footstep Emberfall"
+   ]
+  }
+ ],
+ "engine": "4.7.2.stable.termux",
+ "note": "Phase A 5 paket + E1/E2 5 paket Kenney CC0 (10 total). Runtime E2: Caves/Urban/Foliage/RPGExpansion/Impacts + EmberfallHighlands.tscn + EmberWisp. Sources/ staging tidak dihitung konten.",
+ "phase": "E3"
+}

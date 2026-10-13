@@ -13,6 +13,13 @@ extends Node
 signal volumes_applied(master: float, music: float, sfx: float)
 
 const SFX_BASE: String = "res://Assets/Audio/RPG/Audio/"
+const IMPACT_BASE: String = "res://Assets/Audio/Impacts/"
+const IMPACT_MAP: Dictionary = {
+	"footstep_ember": "footstep_concrete_000.ogg",
+	"hit_metal": "impactMetal_heavy_000.ogg",
+	"mine": "impactMining_000.ogg",
+	"punch": "impactPunch_heavy_000.ogg",
+}
 const AUDIO_MAP: Dictionary = {
 	"swing": "drawKnife1.ogg",
 	"hit": "knifeSlice.ogg",
@@ -45,6 +52,10 @@ func _ready() -> void:
 		var p: String = SFX_BASE + str(AUDIO_MAP[k])
 		if ResourceLoader.exists(p):
 			_streams[k] = load(p) as AudioStream
+	for k2: String in IMPACT_MAP.keys():
+		var p2: String = IMPACT_BASE + str(IMPACT_MAP[k2])
+		if ResourceLoader.exists(p2):
+			_streams[k2] = load(p2) as AudioStream
 	for i: int in 8:
 		var pl := AudioStreamPlayer.new()
 		pl.bus = "SFX"

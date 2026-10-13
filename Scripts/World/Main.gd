@@ -11,11 +11,13 @@ const VERSION: String = "v0.5.0-b5"
 const SPAWN_POS: Vector2 = Vector2(640, 1150)
 const VALLEY_ID: String = "dawnroot_valley"
 const CRYPT_ID: String = "dawnroot_crypt"
+const EMBERFALL_ID: String = "emberfall_highlands"
 const VALLEY_RETURN_POS: Vector2 = Vector2(640, 300)
 const SLIME_SCENE: String = "res://Scenes/Enemies/Slime.tscn"
 const SKELETON_SCENE: String = "res://Scenes/Enemies/Skeleton.tscn"
 const WISP_SCENE: String = "res://Scenes/Enemies/Wisp.tscn"
 const ELITE_SCENE: String = "res://Scenes/Enemies/EliteDawnroot.tscn"
+const EMBER_SCENE: String = "res://Scenes/Enemies/EmberWisp.tscn"
 const ELDER_SCENE: String = "res://Scenes/NPC/ElderMaren.tscn"
 const VILLAGER_SCENE: String = "res://Scenes/NPC/Villager.tscn"
 const LOOT_SCENE: String = "res://Scenes/World/LootPickup.tscn"
@@ -33,6 +35,7 @@ const QUEST_PATHS: Array[String] = [
 const REGION_PATHS: Array[String] = [
 	"res://Data/Regions/dawnroot_valley.tres",
 	"res://Data/Regions/dawnroot_crypt.tres",
+	"res://Data/Regions/emberfall_highlands.tres",
 ]
 ## Marker valley/crypt -> scene musuh (legacy EnemySpawn* = slime/skeleton/wisp).
 const ENCOUNTER_MAP: Dictionary = {
@@ -40,6 +43,7 @@ const ENCOUNTER_MAP: Dictionary = {
 	"SkeletonSpawn": SKELETON_SCENE,
 	"WispSpawn": WISP_SCENE,
 	"EliteSpawn": ELITE_SCENE,
+	"EmberSpawn": EMBER_SCENE,
 	"EnemySpawn1": SLIME_SCENE,
 	"EnemySpawn2": SKELETON_SCENE,
 	"EnemySpawn3": WISP_SCENE,
@@ -57,6 +61,7 @@ var vfx: VFX
 var _item_db: Dictionary = {}
 var _swing_cd: float = 0.0
 var _transition_cd: float = 0.0
+var _step_t: float = 0.0
 var _booted: bool = false
 var _opened: Dictionary = {} # region_id -> Array[String] nama chest terbuka
 var _last_hp: float = -1.0
@@ -127,8 +132,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_swing_cd = maxf(0.0, _swing_cd - delta)
 	_transition_cd = maxf(0.0, _transition_cd - delta)
+	_step_t = maxf(0.0, _step_t - delta)
 	var dlg: bool = ui != null and ui.is_dialogue_open()
 	_prompt.visible = not _player.is_dead() and _player.has_interact_target() and not dlg
+	# ponytail: footstep konkret hangus hanya di Emberfall; upgrade path
+	# surface-deteksi bila region bertambah.
+	if _booted and region_manager != null and region_manager.current_region_id == EMBERFALL_ID:
+		if not _player.is_dead() and _player.velocity.length() > 20.0 and _step_t <= 0.0:
+			if audio != null:
+				audio.play("footstep_ember")
+			_step_t = 0.34
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -170,11 +183,11 @@ func _after_load_region(region_id: String, node: Node2D) -> void:
 	var def: RegionDef = region_manager.get_def(region_id)
 	if def == null:
 		return
-	if region_id == CRYPT_ID:
+	if region_id == CRYPT_ID or region_id == EMBERFALL_ID:
 		_player.position = def.checkpoint_pos
 		region_manager.checkpoint_region = region_id
 		region_manager.checkpoint_pos = def.checkpoint_pos
-	elif _booted:
+	elif region_id == VALLEY_ID and _booted:
 		_player.position = VALLEY_RETURN_POS
 	else:
 		_player.position = def.spawn_pos
@@ -382,6 +395,10 @@ func _on_enemy_damaged(amount: float, _current: float, e: EnemyBase) -> void:
 		return
 	if audio != null:
 		audio.play("hit")
+		# ponytail: denting metal nyata hanya di Emberfall; upgrade path
+		# per-enemy hit-sound bila dibutuhkan.
+		if region_manager != null and region_manager.current_region_id == EMBERFALL_ID:
+			audio.play("hit_metal")
 	if vfx != null:
 		vfx.hit_at(e.global_position)
 		vfx.damage_number(e.global_position, amount)
