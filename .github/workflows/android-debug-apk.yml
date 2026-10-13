@@ -1,0 +1,98 @@
+# C-002: CI export APK debug Android — Mythfall: Echoes of Aether.
+# Kontrak beku: engine Godot 4.7.2 stable (pin eksplisit, JANGAN floating),
+# preset export persis "Android", runner ubuntu-latest.
+# Workflow ini TIDAK menyentuh export_presets.cfg / gameplay / plan.md / plant.md.
+# Tidak ada secret/keystore/APK yang di-commit (lihat .gitignore).
+
+name: Android Debug APK
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: 4.7.2
+  GODOT_STATUS: stable
+  PRESET_NAME: Android
+  APK_PATH: Build/Mythfall-debug.apk
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17 (syarat export Android Godot 4.7)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # Paket persis dari docs resmi 4.7 (exporting_for_android):
+      # sdkmanager "platform-tools" "build-tools;35.0.1" "platforms;android-35"
+      # "cmdline-tools;latest" "cmake;3.10.2.4988404" "ndk;28.1.13356709".
+      # Tanpa Android Studio / emulator / system image (tidak dipakai export prebuilt).
+      - name: Install Android SDK packages
+        run: |
+          yes | sdkmanager --licenses > /dev/null || true
+          sdkmanager --install "platform-tools" "build-tools;35.0.1" "platforms;android-35" "cmdline-tools;latest" "cmake;3.10.2.4988404" "ndk;28.1.13356709"
+          echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
+
+      # URL resmi: github.com/godotengine/godot/releases/download/<tag>/<aset>
+      # (terverifikasi HTTP 200 + filename, 2026-10-13).
+      # ponytail: rilis 4.7.2 tidak menyertakan file .sha256 untuk kedua aset ini,
+      # jadi integritas diverifikasi via unzip -t + cek ukuran — bukan checksum karangan.
+      - name: Install Godot 4.7.2 + export templates
+        run: |
+          set -euxo pipefail
+          BASE="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-${GODOT_STATUS}"
+          curl -fSL -o /tmp/engine.zip "${BASE}/Godot_v${GODOT_VERSION}-${GODOT_STATUS}_linux.x86_64.zip"
+          curl -fSL -o /tmp/templates.tpz "${BASE}/Godot_v${GODOT_VERSION}-${GODOT_STATUS}_export_templates.tpz"
+          unzip -t -q /tmp/engine.zip
+          unzip -t -q /tmp/templates.tpz
+          unzip -q -o /tmp/engine.zip -d /tmp/godot-engine
+          sudo install -m 0755 "/tmp/godot-engine/Godot_v${GODOT_VERSION}-${GODOT_STATUS}_linux.x86_64" /usr/local/bin/godot
+          godot --version
+          TPL_DIR="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_STATUS}"
+          mkdir -p "$TPL_DIR"
+          unzip -q -o /tmp/templates.tpz -d "$TPL_DIR"
+          test -f "$TPL_DIR/android_debug.apk" || { echo "::error::android_debug.apk tidak ada di $TPL_DIR"; ls -la "$TPL_DIR"; exit 1; }
+
+      - name: Import proyek (headless, gagal eksplisit)
+        run: |
+          godot --headless --import || { echo "::error::godot --import gagal"; exit 1; }
+
+      - name: Export APK debug preset Android (gagal eksplisit)
+        run: |
+          mkdir -p Build
+          godot --headless --export-debug "$PRESET_NAME" "$APK_PATH" || { echo "::error::godot --export-debug gagal"; exit 1; }
+
+      # Batas kontrak: >5MB dan <500MB. touch APK kosong = pelanggaran (dicegah di sini).
+      - name: Verifikasi APK + ringkasan
+        run: |
+          test -f "$APK_PATH" || { echo "::error::APK tidak ada: $APK_PATH"; exit 1; }
+          SIZE=$(stat -c%s "$APK_PATH")
+          if [ "$SIZE" -lt 5242880 ] || [ "$SIZE" -gt 524288000 ]; then
+            echo "::error::ukuran APK tidak wajar: $SIZE bytes (syarat >5MB dan <500MB)"
+            exit 1
+          fi
+          echo "APK_SIZE_BYTES=$SIZE" >> "$GITHUB_ENV"
+          "$ANDROID_HOME/build-tools/35.0.1/apksigner" verify --print-certs "$APK_PATH" || echo "::warning::apksigner verify gagal — cek log export"
+          {
+            echo "### APK debug"
+            echo "- SHA: \`$GITHUB_SHA\`"
+            echo "- Ukuran: $SIZE bytes ($(numfmt --to=iec "$SIZE"))"
+            echo "- Path: $APK_PATH"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mythfall-debug-apk
+          path: ${{ env.APK_PATH }}
+          if-no-files-found: error
