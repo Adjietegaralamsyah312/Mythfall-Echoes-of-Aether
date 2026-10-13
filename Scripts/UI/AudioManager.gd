@@ -3,6 +3,9 @@ extends Node
 ## B5 bus Master/Music/SFX + SFX dari file .ogg NYATA Kenney RPG Audio.
 ## Musik: 16 trek CC0 di MusicLibrary (katalog MusicCatalog, play via
 ## play_music anti-overlap). Preview.ogg demo TAK dipakai.
+## G1-001 SFX: 242 entri CC0 via SfxCatalog (Owlish 97 + Atmospheric 23 +
+## Impact-sisa 122) — data di SfxCatalog, playback TETAP play() pool ini
+## (bukan sistem kedua). 8 Impact existing tetap via IMPACT_MAP (kompat).
 ## ponytail: pool 8 AudioStreamPlayer; upgrade path AudioStreamPlaylist
 ## bila butuh musik adaptif.
 ## Mapping jujur (file nyata di Assets/Audio/RPG/Audio/):
@@ -64,6 +67,7 @@ func _ready() -> void:
 		var p: String = SFX_BASE + str(AUDIO_MAP[k])
 		if ResourceLoader.exists(p):
 			_streams[k] = load(p) as AudioStream
+	## G1-001: 242 SFX katalog di-load MALAS via play() (hemat _ready headless/ponsel).
 	for k2: String in IMPACT_MAP.keys():
 		var p2: String = IMPACT_BASE + str(IMPACT_MAP[k2])
 		if ResourceLoader.exists(p2):
@@ -103,6 +107,11 @@ func apply_volumes(master: float, music: float, sfx: float) -> void:
 
 
 func play(name: String) -> void:
+	## G1-001 lazy SFX katalog (tanpa preload 242 file di _ready).
+	if not _streams.has(name):
+		var sp: String = SfxCatalog.path_for(name)
+		if not sp.is_empty() and ResourceLoader.exists(sp):
+			_streams[name] = load(sp) as AudioStream
 	var s: AudioStream = _streams.get(name) as AudioStream
 	if s == null or _pool.is_empty():
 		return

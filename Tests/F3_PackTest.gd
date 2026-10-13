@@ -7,8 +7,8 @@ extends SceneTree
 # ponytail: assert manual; upgrade path GUT bila suite membesar.
 
 const TOL: int = 16384
-const EXP_INITIAL: int = 127584207
-const EXP_EMBER: int = 329853
+const EXP_INITIAL: int = 298001776
+const EXP_EMBER: int = 1337985
 const EXP_LUMINARA: int = 1672604
 
 var _fail: int = 0
@@ -94,7 +94,7 @@ func _run() -> void:
 	# --- manifest 14 item F1 ---
 	var mtxt: String = FileAccess.get_file_as_string("./ASSET_MANIFEST.json")
 	var mj: Dictionary = JSON.parse_string(mtxt) as Dictionary
-	_check(not mj.is_empty() and (mj.get("assets", []) as Array).size() == 21, "manifest 21 item")
+	_check(not mj.is_empty() and (mj.get("assets", []) as Array).size() == 27, "manifest 27 item (21 BULK + 6 G1)")
 	var mpaths: Array = []
 	for a: Variant in (mj.get("assets", []) as Array):
 		mpaths.append(str((a as Dictionary).get("path", "")))

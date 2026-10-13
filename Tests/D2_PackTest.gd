@@ -56,7 +56,7 @@ func _run() -> void:
 		_check(not reg.is_available(pid), pid + " tetap UNAVAILABLE")
 		var p: PackDef = reg.get_pack(pid)
 		_check(p != null and p.file_bytes == -1 and p.download_url.is_empty(), pid + " ukuran -1 + URL kosong (jujur)")
-	_check(reg.installed_size("initial") == 127584207, "installed_size initial 127584207 (F3: union +luminara+BULK)") # F3: union +luminara
+	_check(reg.installed_size("initial") == 298001776, "installed_size initial 298001776 (G1: union +owlish/atmos/impacts-sisa/musik30)") # F3: union +luminara
 
 	# --- 2. Registry roundtrip + corrupt ---
 	for f: String in [TMP_REG]:

@@ -134,19 +134,23 @@
    "zip_bytes": 800850,
    "extracted_bytes": 1035004,
    "sha256_zip": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8",
-   "license": "CC0",
-   "license_file": "LICENSES/kenney_impact-sounds_LICENSE.txt",
-   "runtime_bytes": 70378,
-   "runtime_files": [
-    "footstep_concrete_000.ogg d7267e18..",
-    "impactMetal_heavy_000.ogg e0704569..",
-    "impactMining_000.ogg 36b4ea10..",
-    "impactPunch_heavy_000.ogg b33a8f14.. (penuh di Tools/count + sha256sum)"
-   ],
-    "used_in_e2": [
-     "Scripts/UI/AudioManager.gd IMPACT_MAP + Scripts/World/Main.gd footstep Emberfall"
-    ]
-   },
+    "license": "CC0",
+     "license_file": "LICENSES/kenney_impact-sounds_LICENSE.txt",
+     "runtime_bytes": 1091222,
+     "runtime_files": [
+      "Assets/Audio/Impacts/130 OGG penuh (8 existing + 122 sisa G1-001, dgn .import; sha per-file via `sha256sum Assets/Audio/Impacts/*.ogg`)",
+      "footstep_concrete_000.ogg d7267e18.. (existing)",
+      "impactMetal_heavy_000.ogg e0704569.. (existing)",
+      "impactMining_000.ogg 36b4ea10.. (existing)",
+      "impactPunch_heavy_000.ogg b33a8f14.. (existing, penuh di Tools/count + sha256sum)"
+     ],
+      "used_in_e2": [
+       "Scripts/UI/AudioManager.gd IMPACT_MAP + Scripts/World/Main.gd footstep Emberfall"
+      ],
+      "used_in_g1": [
+       "Scripts/UI/SfxCatalog.gd 122 entri imp_* (tanpa duplikat 8 existing) + AudioManager.play lazy-load"
+      ]
+     },
    {
     "path": "Assets/Environment/Emberfall/floor_is_lava.png",
     "source_url": "https://opengameart.org/content/floor-is-lava",
@@ -354,13 +358,125 @@
       "Assets/Environment/DesertDebris/trunk.png (sha256 065d9ef1f669946e132fd4e05d583d44253ae51fe30c484944d4e5030453773c)",
       "Assets/Environment/DesertDebris/rock.png (sha256 3340c4d6284751f0eea407514b73f0e8376cfb951975fb6d836ba48aa774384c)"
      ],
-     "used_in_bulk": [
-      "Scripts/World/EmberfallHighlands.gd _spawn_scorched_decor (2 pohon hangus + monolit)",
-      "Scripts/World/LuminaraDesert.gd _spawn_debris_decor (2 kayu mati + 2 batu gurun)"
-     ]
-    }
-   ],
-   "engine": "4.7.2.stable.termux",
-   "note": "Phase A 5 paket + E1/E2 5 paket Kenney CC0 (10 total) + F1 4 file CC0 OGA/LPC (14 total) + BULK-001 7 entri CC0 (21 total: 5 zip music-loops-0 drakzlin subset WAV, 1 fantasy-song-pack-v1 troubadour 8 MP3, 1 tiny-rpg-forest ansimuz subset 4 PNG). MP3-duplikat music-loops + PSD/Demo/sound-forest DITOLAK-inklusi (staging saja). Cadangan GameLoops.zip tak dipakai (target tercapai + buffer). Runtime BULK: 16 trek MusicLibrary (122.521.864 B dgn .import) + 4 PNG dekor (11.869 B) + katalog/UI/pack bytes. Sources/ staging tidak dihitung konten.",
-   "phase": "BULK-001"
+      "used_in_bulk": [
+       "Scripts/World/EmberfallHighlands.gd _spawn_scorched_decor (2 pohon hangus + monolit)",
+       "Scripts/World/LuminaraDesert.gd _spawn_debris_decor (2 kayu mati + 2 batu gurun)"
+      ]
+     },
+     {
+      "path": "Assets/Audio/Owlish (sound-effects-pack subset 97)",
+      "source_url": "https://opengameart.org/content/sound-effects-pack",
+      "zip_url": "https://opengameart.org/sites/default/files/Owlish%20Media%20Sound%20Effects.zip",
+      "zip_bytes": 142384346,
+      "extracted_bytes": 211561212,
+      "sha256_zip": "57d7059fe2c0ea5f47c7554ace22a538ea22ab40bfc0906b71aa259afffd3d18",
+      "license": "CC0",
+      "license_file": "",
+      "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok lisensi halaman (cc0.png + CC0 + link CC0 1.0); bukti page.html di Sources/sound-effects-pack/. Kreator: OwlishMedia. Subset 97 WAV (Ambience 3, Cloth blanket 6, Footsteps 13, Impacts 22, Misc pill 1, Paper 8, UI 41, Water tap 2); 173-file zip, 161 WAV. DITOLAK-inklusi: Human 21 + Scifi 11 + Technology 9 + modern tak cocok (shoes_breath 26MB, womens/running/heel, kettle 20MB, spray, toaster, fruit, shouldergrab, tissue, pkf).",
+      "runtime_bytes": 68093226,
+      "runtime_files": [
+       "Assets/Audio/Owlish/97 WAV dgn .import (68.093.226 B; sha per-file via `sha256sum Assets/Audio/Owlish/*/*.wav`)"
+      ],
+      "used_in_g1": [
+       "Scripts/UI/SfxCatalog.gd 97 entri owl_* (ambience/footsteps/impact/water/UI/paper/cloth/loot) + AudioManager.play lazy-load"
+      ]
+     },
+     {
+      "path": "Assets/Audio/Atmospheric (krank subset 23)",
+      "source_url": "https://opengameart.org/content/atmospheric-interaction-sound-pack",
+      "zip_url": "https://opengameart.org/sites/default/files/krank_sounds.7z",
+      "zip_bytes": 8656193,
+      "extracted_bytes": 14506260,
+      "sha256_zip": "5127037a96d50b9ca09d3dfdab9b41784ac94bef89aeec33ba18849745525eec",
+      "license": "CC0",
+      "license_file": "",
+      "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok lisensi halaman; bukti page.html di Sources/atmospheric-interaction-pack/. Kreator: legoluft (via qubodup). 43 WAV 44100Hz stereo. Subset water 10 + menu 3 + summer 10 (skill/loot/chest/quest/door/damage); DITOLAK-inklusi: industry 10 + space 10 (sci-fi tak cocok fantasy).",
+      "runtime_bytes": 9282079,
+      "runtime_files": [
+       "Assets/Audio/Atmospheric/23 WAV dgn .import (9.282.079 B; sha per-file via `sha256sum Assets/Audio/Atmospheric/*/*.wav`)"
+      ],
+      "used_in_g1": [
+       "Scripts/UI/SfxCatalog.gd 23 entri atm_* (magic/ui/interaction) + AudioManager.play lazy-load"
+      ]
+     },
+     {
+      "path": "Assets/Audio/MusicLibrary (glizzy-elf-forest 5 WAV)",
+      "source_url": "https://opengameart.org/content/glizzy-elf-forest-rpg-music-pack",
+      "zip_url": "https://opengameart.org/sites/default/files/loops_and_intros.zip",
+      "zip_bytes": 44427146,
+      "extracted_bytes": 47907392,
+      "sha256_zip": "bab18c35038ef3398f4db7015dd6f3d33df0e5d7ecb67cdd2f2b183da61e34a9",
+      "license": "CC0",
+      "license_file": "",
+      "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok lisensi halaman; bukti page.html di Sources/glizzy-elf-forest/. Kreator: Zane Little Music. 5 WAV fantasy (Forest LOOP explore, Battle LOOP/INTRO combat/boss, Victory LOOP/INTRO loot/quest).",
+      "runtime_bytes": 47910336,
+      "runtime_files": [
+       "Assets/Audio/MusicLibrary/glizzy_Glizzy_Elf_Forest_LOOP.wav (19.353.792 B)",
+       "Assets/Audio/MusicLibrary/glizzy_Grizzly_Dwarf_Battle_LOOP.wav (20.321.472 B)",
+       "Assets/Audio/MusicLibrary/glizzy_Grizzly_Dwarf_Battle_Victory_LOOP.wav (2.898.872 B)",
+       "Assets/Audio/MusicLibrary/glizzy_Grizzly_Dwarf_Battle_INTRO.wav (4.617.784 B)",
+       "Assets/Audio/MusicLibrary/glizzy_Grizzly_Dwarf_Battle_Victory_INTRO.wav (715.472 B)"
+      ],
+      "used_in_g1": [
+       "Scripts/UI/MusicCatalog.gd glizzy_forest/grizzly_battle(+intro)/grizzly_victory(+intro) + GameUI panel Musik"
+      ]
+     },
+     {
+      "path": "Assets/Audio/MusicLibrary/magic_mush.mp3",
+      "source_url": "https://opengameart.org/content/magic-mush",
+      "zip_url": "https://opengameart.org/sites/default/files/magic_mush.mp3",
+      "zip_bytes": 14189280,
+      "extracted_bytes": 14189280,
+      "sha256_zip": "96446f708fb38a5713759371a8b6433ab5b33b0e0958ebe5c207180221ba7572",
+      "license": "CC0",
+      "license_file": "",
+      "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok lisensi halaman; bukti page.html di Sources/magic-mush/. Kreator: iamoneabe. MP3 mellow explore (catatan halaman: loop di 02:46.976, tanpa loop-metadata; loop via flag AudioStreamMP3 di AudioManager).",
+      "runtime_bytes": 14189665,
+      "runtime_files": [
+       "Assets/Audio/MusicLibrary/magic_mush.mp3 (sha256 96446f708fb38a5713759371a8b6433ab5b33b0e0958ebe5c207180221ba7572)"
+      ],
+      "used_in_g1": [
+       "Scripts/UI/MusicCatalog.gd magic_mush (explore/valley) + GameUI panel Musik"
+      ]
+     },
+     {
+      "path": "Assets/Audio/MusicLibrary/fantasy_orchestral.ogg",
+      "source_url": "https://opengameart.org/content/fantasy-orchestral-theme-emotional-piano-loop-joth-vs-extenz",
+      "zip_url": "https://opengameart.org/sites/default/files/fantasyorchestralthememix2.ogg",
+      "zip_bytes": 9678736,
+      "extracted_bytes": 9678736,
+      "sha256_zip": "db3d5213aff2db7d03ac849018c9a6f250bb6e7858fb3d91a68b87a41009e5e4",
+      "license": "CC0",
+      "license_file": "",
+      "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok lisensi halaman; bukti page.html di Sources/fantasy-orchestral/. Kreator: joth vs extenz (mix orchestral+piano). OGG loop boss/menu.",
+      "runtime_bytes": 9679171,
+      "runtime_files": [
+       "Assets/Audio/MusicLibrary/fantasy_orchestral.ogg (sha256 db3d5213aff2db7d03ac849018c9a6f250bb6e7858fb3d91a68b87a41009e5e4)"
+      ],
+      "used_in_g1": [
+       "Scripts/UI/MusicCatalog.gd fantasy_orchestral (boss/menu) + GameUI panel Musik"
+      ]
+     },
+     {
+      "path": "Assets/Audio/MusicLibrary (gameloops subset 7 WAV)",
+      "source_url": "https://opengameart.org/content/royalty-free-game-music-loops",
+      "zip_url": "https://opengameart.org/sites/default/files/GameLoops.zip",
+      "zip_bytes": 73333587,
+      "extracted_bytes": 75143992,
+      "sha256_zip": "94598c63039326934b5d67b303bfce5293925d4535e737c25fca047112655742",
+      "license": "CC0",
+      "license_file": "",
+      "license_note": "OGA tanpa file lisensi terlampir; CC0 terverifikasi di blok lisensi halaman; bukti page.html di Sources/gameloops-reserve/. Kreator: Pudgyplatypus. 33 WAV EDM/DnB/House/ambient; subset 7 paling netral (FutureAmbient 4 + Chillstep 2 + HipHopNoir 1, 20,6 MB) = katalog opsional SAJA, JANGAN auto-BGM region; 26 trek EDM/House/DnB/8Bit/Formant TAK COCOK fantasy DITOLAK-inklusi (staging saja).",
+      "runtime_bytes": 20608479,
+      "runtime_files": [
+       "Assets/Audio/MusicLibrary/gameloops_FutureAmbient_*.wav (4) + gameloops_Chillstep_*.wav (2) + gameloops_HipHopNoir_1.wav (20.608.479 B dgn .import)"
+      ],
+      "used_in_g1": [
+       "Scripts/UI/MusicCatalog.gd future_ambient_*/chillstep_*/hiphop_noir (optional) + GameUI panel Musik"
+      ]
+     }
+    ],
+    "engine": "4.7.2.stable.termux",
+    "note": "Phase A 5 paket + E1/E2 5 paket Kenney CC0 (10 total) + F1 4 file CC0 OGA/LPC (14 total) + BULK-001 7 entri CC0 (21 total) + G1-001 6 entri CC0 (27 total: Owlish subset 97 WAV, krank subset 23 WAV, glizzy 5 WAV, magic MP3, orchestral OGG, gameloops subset 7 WAV; impact-sisa 122 OGG perluasan entri existing tanpa zip baru). DITOLAK-inklusi: Owlish Human/Scifi/Tech+modern, krank industry/space, gameloops 26 EDM, 8 lagu existing tak diunduh ulang. Runtime G1: Owlish 68.093.226 + Atmospheric 9.282.079 + Impacts-penuh 1.091.222 + Music-baru 92.387.651 B (dgn .import). Union total 298.001.607 B. Sources/ staging tidak dihitung konten.",
+    "phase": "G1-001"
 }

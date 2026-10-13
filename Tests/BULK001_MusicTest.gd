@@ -8,8 +8,8 @@ extends SceneTree
 
 const TOL: int = 16384
 const TARGET: int = 100_000_000
-const EXP_INITIAL: int = 127584207
-const EXP_EMBER: int = 329853
+const EXP_INITIAL: int = 298001776
+const EXP_EMBER: int = 1337985
 const EXP_LUMINARA: int = 1672604
 
 var _fail: int = 0
@@ -36,7 +36,7 @@ func _exists_res(p: String) -> bool:
 
 func _run() -> void:
 	# --- katalog: 16 trek, ID unik, file nyata, CC0 ---
-	_check(MusicCatalog.TRACKS.size() == 16, "katalog 16 trek (dapat %d)" % MusicCatalog.TRACKS.size())
+	_check(MusicCatalog.TRACKS.size() == 30, "katalog 30 trek (16 BULK + 14 G1; dapat %d)" % MusicCatalog.TRACKS.size())
 	var ids: Dictionary = {}
 	var files: Dictionary = {}
 	for t: Dictionary in MusicCatalog.TRACKS:
@@ -76,7 +76,7 @@ func _run() -> void:
 	# --- manifest 21 item + entri BULK ---
 	var mtxt: String = FileAccess.get_file_as_string("./ASSET_MANIFEST.json")
 	var mj: Dictionary = JSON.parse_string(mtxt) as Dictionary
-	_check(not mj.is_empty() and (mj.get("assets", []) as Array).size() == 21, "manifest 21 item")
+	_check(not mj.is_empty() and (mj.get("assets", []) as Array).size() == 27, "manifest 27 item (21 BULK + 6 G1)")
 	var mpaths: Array = []
 	for a: Variant in (mj.get("assets", []) as Array):
 		mpaths.append(str((a as Dictionary).get("path", "")))
@@ -130,7 +130,7 @@ func _run() -> void:
 	var panel: PanelContainer = ui.get("_music_panel") as PanelContainer
 	_check(panel != null, "panel Musik ada")
 	var lst: VBoxContainer = ui.get("_music_list") as VBoxContainer
-	_check(lst != null and lst.get_child_count() == 16, "16 tombol trek (dapat %d)" % (lst.get_child_count() if lst != null else -1))
+	_check(lst != null and lst.get_child_count() == 30, "30 tombol trek (16 BULK + 14 G1; dapat %d)" % (lst.get_child_count() if lst != null else -1))
 	ui.toggle_music()
 	_check(panel.visible, "panel Musik tampil via toggle")
 	ui._on_music_pick("battle")

@@ -85,6 +85,31 @@ jobs:
           mkdir -p Build
           godot --headless --export-debug "$PRESET_NAME" "$APK_PATH" || { echo "::error::godot --export-debug gagal"; exit 1; }
 
+      # G2-001: gate ukuran APK. HARD FAIL <100MB; warning 100-120MB (sukses tapi belum SELESAI); lulus >=120MB.
+      # Upload artifact TETAP di bawah agar ukuran terlihat; keberhasilan = gate ini + verifikasi berikut.
+      - name: Size gate G2 (gagal eksplisit <100MB, warning <120MB)
+        run: |
+          SIZE=$(stat -c '%s' "$APK_PATH")
+          echo "G2_APK_SIZE_BYTES=$SIZE" >> "$GITHUB_ENV"
+          MB_DEC=$(awk "BEGIN {printf \"%.2f\", $SIZE/1000000}")
+          MIB=$(awk "BEGIN {printf \"%.2f\", $SIZE/1048576}")
+          echo "APK size: $SIZE bytes (${MB_DEC} MB decimal, ${MIB} MiB)"
+          if [ "$SIZE" -lt 100000000 ]; then
+            echo "::error::G2 size gate GAGAL: APK $SIZE bytes < 100000000 (100MB). Target acceptance 120MB."
+            exit 1
+          fi
+          if [ "$SIZE" -lt 120000000 ]; then
+            echo "::warning::G2 size gate WARNING: APK $SIZE bytes < 120000000 (120MB target) tapi >=100MB — build sukses, BELUM boleh dilaporkan SELESAI."
+          else
+            echo "G2 size gate LULUS: APK $SIZE bytes >= 120000000."
+          fi
+          {
+            echo "### G2 size gate"
+            echo "- Ukuran: $SIZE bytes (${MB_DEC} MB / ${MIB} MiB)"
+            echo "- Syarat keras: >=100000000 (100MB)"
+            echo "- Target acceptance: >=120000000 (120MB)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
       # Batas kontrak: >5MB dan <500MB. touch APK kosong = pelanggaran (dicegah di sini).
       - name: Verifikasi APK + ringkasan
         run: |

@@ -5,8 +5,8 @@ extends SceneTree
 # ponytail: assert manual; upgrade path GUT bila suite membesar.
 
 const TOL: int = 16384
-const EXP_INITIAL: int = 127584207
-const EXP_EMBER: int = 329853
+const EXP_INITIAL: int = 298001776
+const EXP_EMBER: int = 1337985
 ## F3: luminara terisi (v0.1.0); 3 paket lain tetap rencana.
 
 var _fail: int = 0

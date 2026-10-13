@@ -50,3 +50,7 @@ Hanya capaian terverifikasi di file + `git log`. Rencana tidak dicatat sebagai s
 ## Uncommitted BULK-001 (2026-10-13, JANGAN baca sebagai commit)
 
 - BULK-001 (belum commit): 16 trek CC0 `MusicLibrary` (8 WAV drakzlin subset + 8 MP3 troubadour) + `MusicCatalog.gd` + perluasan `AudioManager` (play_music anti-overlap) + panel Musik `GameUI` + BGM menu + auto-BGM valley/luminara + 4 PNG dekor Scorched/DesertDebris + `Tests/BULK001_MusicTest.gd`; `ASSET_MANIFEST.json` 21 item; `initial.tres` 127.584.207 B union (LEBIH 100 MB 27.584.233 B, dedup SHA-256); `Tools/count_content.py` upgrade SHA-256-dedup; docs + credits + SOURCING_LOG §11-15; semua 9 suite hijau; `--import` exit 0; APK 0 lokal (jujur, tanpa export).
+
+## Uncommitted G1-001 (2026-10-13, JANGAN baca sebagai commit)
+
+- G1-001 (belum commit, unstaged): Owlish subset 97 + krank subset 23 + impact-sisa 122 (SfxCatalog 242 + AudioManager.play lazy) + MusicLibrary 30 trek (glizzy 5 + magic 1 + orchestral 1 + gameloops-subset 7; MusicCatalog perluasan; GameUI otomatis 30 tombol); manifest 27 item; initial 298.001.776 B union (+170.417.400); emberfall 1.337.985 B; prediksi APK jujur ~125–130 MB (CUKUP G2); Tests/G1001 BARU + BULK/E3/F3/D2 disinkron hijau; `--import` exit 0; APK 0 lokal (G2 yang build); tanpa stage/commit/push.
