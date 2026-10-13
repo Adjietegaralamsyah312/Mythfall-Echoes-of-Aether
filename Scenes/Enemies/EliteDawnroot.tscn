@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/Skeleton.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Characters/Roguelike/Spritesheet/roguelikeChar_transparent.png" id="2"]
+[ext_resource type="Resource" path="res://Data/Enemies/elite_dawnroot.tres" id="3"]
+[ext_resource type="Script" path="res://Scripts/Combat/Hitbox.gd" id="4"]
+[ext_resource type="Script" path="res://Scripts/Combat/Hurtbox.gd" id="5"]
+
+[sub_resource type="AtlasTexture" id="Atlas_enemy"]
+atlas = ExtResource("2")
+region = Rect2(204, 68, 16, 16)
+
+[sub_resource type="CapsuleShape2D" id="Capsule_body"]
+radius = 7.0
+height = 26.0
+
+[sub_resource type="CircleShape2D" id="Circle_hurt"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="Circle_hit"]
+radius = 20.0
+
+[node name="EliteDawnroot" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(1.35, 1.35)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1")
+stats = ExtResource("3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("Capsule_body")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("Atlas_enemy")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("5")
+team = "enemy"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("Circle_hurt")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(16, 0)
+collision_layer = 0
+collision_mask = 8
+monitoring = false
+monitorable = false
+script = ExtResource("4")
+team = "enemy"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("Circle_hit")

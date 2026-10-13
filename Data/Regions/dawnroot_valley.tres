@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RegionDef" format=3]
+
+[ext_resource type="Script" path="res://Scripts/World/RegionDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+region_id = "dawnroot_valley"
+display_name = "Dawnroot Valley"
+scene_path = "res://Scenes/World/DawnrootValley.tscn"
+spawn_pos = Vector2(640, 1150)
+checkpoint_pos = Vector2(640, 1150)
+dungeon_ref = "dawnroot_crypt"
+limit_left = 0
+limit_top = 0
+limit_right = 2560
+limit_bottom = 1440

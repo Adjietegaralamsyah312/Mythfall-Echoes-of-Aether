@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestDef" format=3]
+
+[ext_resource type="Script" path="res://Scripts/Quests/QuestDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+quest_id = "dawnroot_intro"
+display_name = "Langkah Pertama di Dawnroot"
+giver_npc_id = "elder_maren"
+prereq_ids = Array[String]([])
+objectives = Array[Dictionary]([{"type": "talk", "target_id": "elder_maren", "count": 1}])
+reward_xp = 20
+reward_items = Array[Dictionary]([{"item_id": "health_potion", "qty": 1}])
+accept_lines = Array[String](["Selamat datang di Dawnroot, pengelana.", "Aku Maren, tetua desa ini. Akar kami melemah sejak pecahnya Aether.", "Bantu kami, dan desa ini akan mengingat namamu."])
+complete_lines = Array[String](["Bagus. Kau mau mendengar, itu langkah pertama.", "Ambil ramuan ini. Hutan liar menunggumu."])

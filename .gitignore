@@ -1,0 +1,19 @@
+# Godot 4
+.godot/
+export.cfg
+# ponytail: export_presets.cfg SENGAJA tidak di-ignore — preset Android harus ter-commit (kontrak C-001/C-002).
+*.translation
+
+# Build Android
+*.apk
+*.aab
+*.keystore
+
+# Logs & OS
+*.log
+logs/
+.DS_Store
+Thumbs.db
+
+# Catatan: JANGAN ignore *.import — file .import dipertahankan agar
+# impor aset konsisten antar mesin.

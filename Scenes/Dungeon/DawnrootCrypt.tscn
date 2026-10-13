@@ -1,0 +1,186 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://Scripts/World/DawnrootCrypt.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Environment/RoguelikeRPG/Spritesheet/roguelikeSheet_transparent.png" id="2"]
+[ext_resource type="PackedScene" path="res://Scenes/World/Chest.tscn" id="3"]
+
+[sub_resource type="AtlasTexture" id="G_gray_a"]
+atlas = ExtResource("2")
+region = Rect2(408, 238, 16, 16)
+
+[sub_resource type="AtlasTexture" id="G_gray_b"]
+atlas = ExtResource("2")
+region = Rect2(425, 238, 16, 16)
+
+[sub_resource type="AtlasTexture" id="G_torch_a"]
+atlas = ExtResource("2")
+region = Rect2(272, 119, 16, 16)
+
+[sub_resource type="AtlasTexture" id="G_torch_b"]
+atlas = ExtResource("2")
+region = Rect2(289, 119, 16, 16)
+
+[sub_resource type="AtlasTexture" id="G_stone"]
+atlas = ExtResource("2")
+region = Rect2(374, 340, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="CpRect"]
+size = Vector2(140, 80)
+
+[sub_resource type="RectangleShape2D" id="ExitRect"]
+size = Vector2(120, 50)
+
+[sub_resource type="RectangleShape2D" id="Wall_ch"]
+size = Vector2(1312, 32)
+
+[sub_resource type="RectangleShape2D" id="Wall_cv"]
+size = Vector2(32, 752)
+
+[node name="DawnrootCrypt" type="Node2D"]
+script = ExtResource("1")
+
+[node name="GroundDark" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.06, 0.06, 0.09, 1)
+
+[node name="CryptTitle" type="Label" parent="."]
+offset_left = 440.0
+offset_top = 690.0
+offset_right = 840.0
+offset_bottom = 712.0
+text = "DAWNROOT CRYPT — ruang elite"
+horizontal_alignment = 1
+
+[node name="Floor1" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(592, 150)
+scale = Vector2(3, 3)
+texture = SubResource("G_gray_a")
+
+[node name="Floor2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(640, 150)
+scale = Vector2(3, 3)
+texture = SubResource("G_gray_b")
+
+[node name="Floor3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(688, 150)
+scale = Vector2(3, 3)
+texture = SubResource("G_gray_a")
+
+[node name="Floor4" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(592, 198)
+scale = Vector2(3, 3)
+texture = SubResource("G_gray_b")
+
+[node name="Floor5" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(640, 198)
+scale = Vector2(3, 3)
+texture = SubResource("G_gray_a")
+
+[node name="Floor6" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(688, 198)
+scale = Vector2(3, 3)
+texture = SubResource("G_gray_b")
+
+[node name="Pillar1" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(480, 300)
+scale = Vector2(3, 6)
+texture = SubResource("G_stone")
+
+[node name="Pillar2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(800, 300)
+scale = Vector2(3, 6)
+texture = SubResource("G_stone")
+
+[node name="Torch1" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(560, 480)
+scale = Vector2(3, 3)
+texture = SubResource("G_torch_a")
+
+[node name="Torch2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(720, 480)
+scale = Vector2(3, 3)
+texture = SubResource("G_torch_b")
+
+[node name="EliteSpawn1" type="Marker2D" parent="."]
+position = Vector2(640, 200)
+
+[node name="SkeletonSpawn1" type="Marker2D" parent="."]
+position = Vector2(520, 260)
+
+[node name="SkeletonSpawn2" type="Marker2D" parent="."]
+position = Vector2(760, 260)
+
+[node name="CryptRewardChest" parent="." instance=ExtResource("3")]
+position = Vector2(640, 110)
+loot_items = Array[Dictionary]([{"item_id": "guard_helm", "qty": 1}, {"item_id": "rusty_sword", "qty": 1}])
+
+[node name="CheckpointZone" type="Area2D" parent="."]
+position = Vector2(640, 560)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointZone"]
+shape = SubResource("CpRect")
+
+[node name="Ring" type="Polygon2D" parent="CheckpointZone"]
+polygon = PackedVector2Array(-56, 0, 0, -28, 56, 0, 0, 28)
+color = Color(0.4, 0.85, 0.6, 0.5)
+
+[node name="Label" type="Label" parent="CheckpointZone"]
+offset_left = -120.0
+offset_top = 34.0
+offset_right = 120.0
+offset_bottom = 56.0
+text = "CHECKPOINT"
+horizontal_alignment = 1
+
+[node name="ExitPortal" type="Area2D" parent="."]
+position = Vector2(640, 670)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitPortal"]
+shape = SubResource("ExitRect")
+
+[node name="Gate" type="Polygon2D" parent="ExitPortal"]
+polygon = PackedVector2Array(-44, 20, -44, -12, 44, -12, 44, 20, 30, 20, 30, -2, -30, -2, -30, 20)
+color = Color(0.5, 0.4, 0.7, 0.8)
+
+[node name="Label" type="Label" parent="ExitPortal"]
+offset_left = -120.0
+offset_top = -44.0
+offset_right = 120.0
+offset_bottom = -22.0
+text = "KELUAR — VALLEY"
+horizontal_alignment = 1
+
+[node name="Bounds" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(640, -16)
+shape = SubResource("Wall_ch")
+
+[node name="Bottom" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(640, 736)
+shape = SubResource("Wall_ch")
+
+[node name="Left" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(-16, 360)
+shape = SubResource("Wall_cv")
+
+[node name="Right" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(1296, 360)
+shape = SubResource("Wall_cv")

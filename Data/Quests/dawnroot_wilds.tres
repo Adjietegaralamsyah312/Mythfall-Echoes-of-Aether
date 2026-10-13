@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestDef" format=3]
+
+[ext_resource type="Script" path="res://Scripts/Quests/QuestDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+quest_id = "dawnroot_wilds"
+display_name = "Ancaman Hutan Liar"
+giver_npc_id = "elder_maren"
+prereq_ids = Array[String](["dawnroot_intro"])
+objectives = Array[Dictionary]([{"type": "kill", "target_id": "slime", "count": 3}, {"type": "collect", "target_id": "aether_shard", "count": 2}])
+reward_xp = 60
+reward_items = Array[Dictionary]([{"item_id": "rusty_sword", "qty": 1}])
+accept_lines = Array[String](["Slime meluap dari hutan dan pecahan Aether berserakan.", "Kalahkan 3 slime dan kumpulkan 2 pecahan Aether untukku.", "Hanya slime dan pecahan asli yang kuhitung. Hati-hati di sana."])
+complete_lines = Array[String](["Hutan bisa bernapas lagi berkatmu.", "Pedang tua ini kini milikmu. Gunakan dengan baik."])

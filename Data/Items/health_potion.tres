@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemDef" format=3]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+item_id = "health_potion"
+display_name = "Health Potion"
+type = "consumable"
+heal_amount = 30.0
+description = "Memulihkan 30 HP. (Efek pakai di B5.)"
+max_stack = 10

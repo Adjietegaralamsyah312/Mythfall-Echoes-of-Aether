@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestDef" format=3]
+
+[ext_resource type="Script" path="res://Scripts/Quests/QuestDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+quest_id = "dawnroot_sealed_dungeon"
+display_name = "Ruang Bawah Tersegel"
+giver_npc_id = "elder_maren"
+prereq_ids = Array[String](["dawnroot_wilds"])
+objectives = Array[Dictionary]([{"type": "enter", "target_id": "dawnroot_crypt", "count": 1}, {"type": "kill_elite", "target_id": "elite_dawnroot", "count": 1}])
+reward_xp = 120
+reward_items = Array[Dictionary]([{"item_id": "guard_helm", "qty": 1}])
+accept_lines = Array[String](["Di bawah reruntuhan ada ruang bawah yang tersegel: Dawnroot Crypt.", "Segelnya terbuka untukmu setelah hutan aman. Masuk dan hadapi penjaganya.", "Kalahkan Elite Dawnroot Guardian dan kembali dengan kabar kemenangan."])
+complete_lines = Array[String](["Ruang bawah sunyi lagi. Dawnroot berutang padamu.", "Helm penjaga ini pantas kau sandang."])

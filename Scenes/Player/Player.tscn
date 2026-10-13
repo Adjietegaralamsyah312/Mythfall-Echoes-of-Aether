@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Characters/Roguelike/Spritesheet/roguelikeChar_transparent.png" id="2"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerStats.gd" id="3"]
+[ext_resource type="Script" path="res://Scripts/Combat/Hurtbox.gd" id="4"]
+
+[sub_resource type="AtlasTexture" id="Atlas_player"]
+atlas = ExtResource("2")
+region = Rect2(17, 102, 16, 16)
+
+[sub_resource type="CapsuleShape2D" id="Capsule_player"]
+radius = 5.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id="Circle_interact"]
+radius = 36.0
+
+[sub_resource type="CircleShape2D" id="Circle_hurt"]
+radius = 12.0
+
+[sub_resource type="Resource" script=ExtResource("3") id="Stats_player"]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 1
+collision_mask = 3
+script = ExtResource("1")
+stats = SubResource("Stats_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("Capsule_player")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("Atlas_player")
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("Circle_interact")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("4")
+team = "player"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("Circle_hurt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+limit_left = 0
+limit_top = 0
+limit_right = 1280
+limit_bottom = 720
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+enabled = true

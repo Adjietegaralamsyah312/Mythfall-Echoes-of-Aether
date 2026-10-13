@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Scripts/NPC/NPC.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Characters/Roguelike/Spritesheet/roguelikeChar_transparent.png" id="2"]
+
+[sub_resource type="AtlasTexture" id="Atlas_elder"]
+atlas = ExtResource("2")
+region = Rect2(34, 34, 16, 16)
+
+[sub_resource type="CapsuleShape2D" id="Capsule_body"]
+radius = 5.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id="Circle_interact"]
+radius = 28.0
+
+[node name="ElderMaren" type="StaticBody2D" groups=["interactable", "npc"]]
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("1")
+npc_id = "elder_maren"
+display_name = "Elder Maren"
+idle_lines = Array[String](["Desa Dawnroot bertahan karena Aether yang mengalir di akarnya.", "Bicaralah padaku jika kau siap membantu, pengelana.", "Hutan di luar pagar tak lagi aman seperti dulu."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("Capsule_body")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("Atlas_elder")
+
+[node name="InteractArea" type="Area2D" parent="." groups=["interactable"]]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("Circle_interact")

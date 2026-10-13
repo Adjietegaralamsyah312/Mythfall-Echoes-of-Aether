@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SkeletonEnemy" format=3]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/EnemyStats.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+enemy_id = "skeleton"
+display_name = "Skeleton"
+max_hp = 55.0
+damage = 11.0
+speed = 75.0
+aggro_radius = 220.0
+attack_range = 28.0
+attack_cooldown = 1.1
+attack_windup = 0.55
+xp_reward = 25
+loot_table = Array[Dictionary]([{"item_id": "health_potion", "chance": 0.25}, {"item_id": "rusty_sword", "chance": 0.12}, {"item_id": "aether_shard", "chance": 0.2}])
