@@ -69,6 +69,11 @@ jobs:
           TPL_DIR="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_STATUS}"
           mkdir -p "$TPL_DIR"
           unzip -q -o /tmp/templates.tpz -d "$TPL_DIR"
+          # ponytail: tpz 4.7.2 berisi subdir templates/ — ratakan bila perlu.
+          if [ -f "$TPL_DIR/templates/android_debug.apk" ]; then
+            mv "$TPL_DIR/templates/"* "$TPL_DIR/"
+            rmdir "$TPL_DIR/templates"
+          fi
           test -f "$TPL_DIR/android_debug.apk" || { echo "::error::android_debug.apk tidak ada di $TPL_DIR"; ls -la "$TPL_DIR"; exit 1; }
 
       - name: Import proyek (headless, gagal eksplisit)
