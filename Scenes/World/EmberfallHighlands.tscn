@@ -72,9 +72,11 @@ size = Vector2(120, 24)
 script = ExtResource("1")
 
 [node name="GroundBasalt" type="ColorRect" parent="."]
-offset_right = 1920.0
-offset_bottom = 1080.0
-color = Color(0.09, 0.06, 0.06, 1)
+offset_left = -240.0
+offset_top = -240.0
+offset_right = 2160.0
+offset_bottom = 1320.0
+color = Color(0.17, 0.11, 0.1, 1)
 
 [node name="GroundScorch1" type="ColorRect" parent="."]
 offset_left = 100.0

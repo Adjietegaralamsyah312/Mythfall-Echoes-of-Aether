@@ -24,6 +24,8 @@ const IMPACT_BASE: String = "res://Assets/Audio/Impacts/"
 const AMBIENT_BASE: String = "res://Assets/Audio/Ambience/"
 const AMBIENT_MAP: Dictionary = {
 	"ambient_ember": "dungeon_ambient_1.ogg",
+	"ambient_valley": "dungeon_ambient_1.ogg",
+	"ambient_desert": "dungeon_ambient_1.ogg",
 }
 const IMPACT_MAP: Dictionary = {
 	"footstep_ember": "footstep_concrete_000.ogg",

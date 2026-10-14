@@ -108,6 +108,7 @@ func _ready() -> void:
 			_item_db[it.item_id] = it
 	_player.attacked.connect(_on_player_attacked)
 	_player.interacted.connect(_on_interacted)
+	_player.dodge.connect(_on_player_dodge)
 	progression.leveled_up.connect(_on_leveled_up)
 	progression.xp_changed.connect(_on_xp_changed)
 	quest_manager = QuestManager.new()
@@ -302,7 +303,7 @@ func _on_hp(hp: float, max_hp: float) -> void:
 		if audio != null:
 			audio.play("hurt")
 		if vfx != null:
-			vfx.hit_at(_player.global_position)
+			vfx.hit_at(_player.global_position, "enemy")
 	_last_hp = hp
 
 
@@ -327,6 +328,8 @@ func _on_leveled_up(new_level: int) -> void:
 	_player.hp = minf(_player.stats.max_hp, _player.hp + 30.0)
 	if audio != null:
 		audio.play("levelup")
+	if vfx != null:
+		vfx.levelup_at(_player.global_position)
 	if ui != null:
 		ui.refresh_xp()
 		ui.refresh_tracker()
@@ -381,6 +384,8 @@ func _on_player_attacked() -> void:
 	_swing_cd = _player.stats.attack_cooldown
 	if audio != null:
 		audio.play("swing")
+	if vfx != null:
+		vfx.slash_at(_player.global_position + _player.facing * _player.stats.attack_range * 0.7, _player.facing)
 	var hb := Hitbox.new()
 	hb.team = &"player"
 	hb.damage = _player.stats.attack_damage + float(progression.attack_bonus())
@@ -398,6 +403,11 @@ func _on_player_attacked() -> void:
 	get_tree().create_timer(0.18).timeout.connect(_free_swing.bind(hb))
 
 
+func _on_player_dodge() -> void:
+	if vfx != null:
+		vfx.dodge_at(_player.global_position, _player.facing)
+
+
 func _free_swing(hb: Hitbox) -> void:
 	if is_instance_valid(hb):
 		hb.queue_free()
@@ -413,7 +423,7 @@ func _on_enemy_damaged(amount: float, _current: float, e: EnemyBase) -> void:
 		if region_manager != null and region_manager.current_region_id == EMBERFALL_ID:
 			audio.play("hit_metal")
 	if vfx != null:
-		vfx.hit_at(e.global_position)
+		vfx.hit_at(e.global_position, "enemy")
 		vfx.damage_number(e.global_position, amount)
 
 
@@ -423,7 +433,7 @@ func _on_enemy_died(e: EnemyBase) -> void:
 	if audio != null:
 		audio.play("die")
 	if vfx != null:
-		vfx.death_at(e.global_position)
+		vfx.death_at(e.global_position, e.stats.enemy_id)
 	progression.add_xp(e.stats.xp_reward)
 	quest_manager.notify_kill(e.stats.enemy_id)
 	quest_manager.notify_kill_elite(e.stats.enemy_id)
@@ -455,6 +465,8 @@ func _spawn_loot(item_id: String, pos: Vector2, qty: int) -> void:
 func _on_loot_picked(item_id: String, gained: int) -> void:
 	if audio != null:
 		audio.play("pickup")
+	if vfx != null:
+		vfx.loot_at(_player.global_position)
 	quest_manager.notify_collect(item_id, gained)
 	if ui != null:
 		ui.refresh_tracker()
@@ -567,6 +579,8 @@ func _open_chest(chest: Chest) -> void:
 		return
 	if audio != null:
 		audio.play("chest")
+	if vfx != null:
+		vfx.chest_at(chest.global_position)
 	var region: String = region_manager.current_region_id
 	var done: Array = _opened.get(region, [])
 	if not done.has(chest.name):
@@ -606,6 +620,8 @@ func _on_quest_completed(quest_id: String) -> void:
 		return
 	if audio != null:
 		audio.play("quest")
+	if vfx != null:
+		vfx.quest_at(_player.global_position)
 	if ui != null:
 		ui.refresh_tracker()
 	if q.reward_xp > 0:

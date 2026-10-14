@@ -3,6 +3,7 @@ extends Node
 ## B4 loader region sederhana: register via .tres, load/unload satu region
 ## aktif, transisi diminta via travel_to() Main dari Area2D.
 ## Sinyal B5: region_changed, region_discovered, checkpoint_reached.
+## F-D: ambience per region + quality-aware ambience VFX.
 # ponytail: tanpa streaming/chunk; upgrade path preload + background
 # load bila region >aban atau butuh transisi mulus.
 
@@ -16,6 +17,16 @@ var current_node: Node2D = null
 var discovered: Array[String] = []
 var checkpoint_region: String = ""
 var checkpoint_pos: Vector2 = Vector2.ZERO
+
+## F-D: peta ambience VFX per region (data saja; audio diurus Main via
+## AudioManager, VFX via grup "vfx" milik Main — bukan sistem kedua).
+## ponytail: 1 sumber data; upgrade path padam otomatis saat region unload.
+var _ambient_map: Dictionary = {
+	"dawnroot_valley": "leaves",
+	"dawnroot_crypt": "dust",
+	"emberfall_highlands": "embers",
+	"luminara_desert": "dust",
+}
 
 
 func setup(defs: Array[RegionDef]) -> void:
@@ -62,7 +73,31 @@ func load_region(region_id: String, root: Node) -> Node2D:
 		discovered.append(region_id)
 		region_discovered.emit(region_id)
 	region_changed.emit(region_id)
+
+	## F-D: teruskan ambience VFX region ke sistem VFX Main (grup "vfx").
+	## Audio diurus Main._after_load_region; di sini hanya VFX + aman bila
+	## VFX belum ada (tes headless tanpa Main).
+	_apply_region_vfx(region_id)
 	return n
+
+
+## Nama ambience VFX untuk region ("" = tanpa ambience).
+func ambience_vfx_for(region_id: String) -> String:
+	return str(_ambient_map.get(region_id, ""))
+
+
+## F-D: stop ambience lama + start ambience region via grup "vfx".
+func _apply_region_vfx(region_id: String) -> void:
+	if get_tree() == null:
+		return
+	var vfx: Node = get_tree().get_first_node_in_group("vfx")
+	if vfx == null or not vfx.has_method("stop_ambience"):
+		return
+	vfx.call("stop_ambience")
+	var vfx_name: String = ambience_vfx_for(region_id)
+	if vfx_name.is_empty() or not vfx.has_method("start_ambience"):
+		return
+	vfx.call("start_ambience", vfx_name)
 
 
 ## Dipanggil saat player sentuh checkpoint (B5: hook autosave di Main).

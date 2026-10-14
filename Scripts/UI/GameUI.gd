@@ -47,6 +47,7 @@ var _root: Control
 var _level_label: Label
 var _xp_bar: ProgressBar
 var _cd_bar: ProgressBar
+var _cd_label: Label
 var _tracker: PanelContainer
 var _tracker_text: Label
 var _tracker_min: Button
@@ -140,7 +141,21 @@ func _build_stats() -> void:
 	_cd_bar.show_percentage = false
 	_cd_bar.max_value = 1.0
 	_cd_bar.value = 1.0
+	# Warna cooldown: hijau=ready, kuning=charging, merah=cooldown
+	_cd_bar.add_theme_color_override("fill", Color(0.3, 0.85, 0.4))
+	_cd_bar.add_theme_color_override("background", Color(0.05, 0.05, 0.1, 0.7))
 	_root.add_child(_cd_bar)
+	# Label cooldown singkat
+	_cd_label = Label.new()
+	_cd_label.position = Vector2(16, 134)
+	_cd_label.size = Vector2(280, 16)
+	_cd_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_cd_label.add_theme_font_size_override("font_size", 12)
+	_cd_label.add_theme_color_override("font_color", Color(0.9, 0.9, 0.95))
+	_cd_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.8))
+	_cd_label.add_theme_constant_override("outline_size", 2)
+	_cd_label.text = ""
+	_root.add_child(_cd_label)
 
 
 func _build_tracker() -> void:
@@ -190,18 +205,23 @@ func _build_minimap() -> void:
 
 
 func _build_toolbar() -> void:
+	# ponytail: bar tengah-atas (bukan x absolut) agar tetap di tengah
+	# pada layar lebar/expand; container IGNORE agar tak menelan klik dunia.
+	var bar := HBoxContainer.new()
+	bar.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	bar.position = Vector2(-168, 16)
+	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bar.add_theme_constant_override("separation", 16)
+	_root.add_child(bar)
 	_toolbar_q = _mkbtn("Quest")
-	_toolbar_q.position = Vector2(500, 16)
 	_toolbar_q.pressed.connect(toggle_questlog)
-	_root.add_child(_toolbar_q)
+	bar.add_child(_toolbar_q)
 	_toolbar_p = _mkbtn("Jeda")
-	_toolbar_p.position = Vector2(612, 16)
 	_toolbar_p.pressed.connect(toggle_pause)
-	_root.add_child(_toolbar_p)
+	bar.add_child(_toolbar_p)
 	_toolbar_m = _mkbtn("Musik")
-	_toolbar_m.position = Vector2(724, 16)
 	_toolbar_m.pressed.connect(toggle_music)
-	_root.add_child(_toolbar_m)
+	bar.add_child(_toolbar_m)
 
 
 func _panel_center(w: float, h: float) -> PanelContainer:
@@ -473,6 +493,16 @@ func apply_settings(s: Dictionary) -> void:
 		if _s_quality.get_item_text(i) == str(settings["quality"]):
 			_s_quality.selected = i
 	_root.scale = Vector2.ONE * float(settings["ui_scale"])
+
+	## F-D: Text readability - minimum skala UI 0.8 agar teks tetap terbaca.
+	## (VFX quality diatur Main via _apply_settings_side_effects, bukan di sini.)
+	var scale: float = float(settings["ui_scale"])
+	var min_scale: float = 0.8
+	if scale < min_scale:
+		settings["ui_scale"] = min_scale
+		_root.scale = Vector2.ONE * min_scale
+		_s_scale.value = min_scale * 100.0
+
 	if audio != null:
 		audio.apply_volumes(float(settings["master"]), float(settings["music"]), float(settings["sfx"]))
 
@@ -547,7 +577,19 @@ func refresh_xp() -> void:
 
 
 func set_cooldown(frac: float) -> void:
-	_cd_bar.value = clampf(frac, 0.0, 1.0)
+	frac = clampf(frac, 0.0, 1.0)
+	_cd_bar.value = frac
+	if frac >= 1.0:
+		_cd_label.text = "Serangan: SIAP"
+		_cd_bar.add_theme_color_override("fill", Color(0.3, 0.85, 0.4))
+	elif frac > 0.5:
+		var cd_val: float = ceil((1.0 - frac) * (player.stats.attack_cooldown if player.stats != null else 0.45) * 10.0) / 10.0
+		_cd_label.text = "Serangan: %ds" % cd_val
+		_cd_bar.add_theme_color_override("fill", Color(1.0, 0.8, 0.3))
+	else:
+		var cd_val: float = ceil((1.0 - frac) * (player.stats.attack_cooldown if player.stats != null else 0.45) * 10.0) / 10.0
+		_cd_label.text = "Serangan: %ds" % cd_val
+		_cd_bar.add_theme_color_override("fill", Color(1.0, 0.4, 0.3))
 
 
 func refresh_tracker() -> void:
